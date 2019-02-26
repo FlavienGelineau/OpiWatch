@@ -1,0 +1,15 @@
+{
+  "name": "receptor",
+  "version": "1.0.0",
+  "description": "central server for opiwatch",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Maxence Lecanu",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4"
+  }
+}
