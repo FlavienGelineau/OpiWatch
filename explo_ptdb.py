@@ -3,7 +3,7 @@ import os
 from tqdm import tqdm
 from wfdb import io, plot
 import pandas as pd
-
+# https://mc.ai/diagnosing-myocardial-infarction-using-long-short-term-memory-networks-lstms/
 # The folder where you want to store your data
 data_folder = '../data/'
 # First get the list of available records and then download
@@ -19,6 +19,7 @@ record = io.rdrecord(record_name="../data/ptdb/"+record_name)
 records = []
 for record_name in tqdm(record_names):
     record = io.rdrecord(record_name=os.path.join('../data/ptdb/', record_name))
+    print(record.si)
     # label = comments_to_dict(record.comments)['Reason for admission'][1:]
     label = record.comments[4].split(": ")[-1]
     patient = record_name.split('/')[0]
@@ -27,4 +28,5 @@ for record_name in tqdm(record_names):
 
 channels = record.sig_name
 df_records = pd.DataFrame(records)
+print(df_records[''])
 print(df_records)
