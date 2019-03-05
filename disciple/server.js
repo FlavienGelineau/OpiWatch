@@ -3,6 +3,7 @@ const envt = process.env.NODE_ENV || 'development';
 const config = require('./config.json')[envt];
 const fs = require('fs');
 const cron = require('node-cron');
+const ip = require('ip');
 
 const random = require('./utils/random');
 
@@ -52,7 +53,7 @@ app.get('/history', function(req, res) {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     res.status(200);
     res.contentType("text/plain");
-    res.send(JSON.stringify({"data" : history, "id" : ID}));
+    res.send(JSON.stringify({"data" : history, "name" : ID}));
 })
 
 /* ========================================
@@ -78,10 +79,11 @@ app.listen(config.node_port, () => {
     console.log("Cleaning history...")
     fs.writeFile('./logs/history.txt', '', err => {
         if(!err) {
-            console.log("succesfully cleaned history");
+            console.log("Succesfully cleaned history");
         } else {
             throw err;
         }
     })
     console.log(`Server listening on port ${config.node_port}`)
+    console.log(`Server local uri : ${ip.address()}:${config.node_port}`)
 })
