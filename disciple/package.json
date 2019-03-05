@@ -1,0 +1,16 @@
+{
+  "name": "disciple",
+  "version": "1.0.0",
+  "description": "express js server for generating data for opi-watch",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "node-cron": "^2.0.3"
+  }
+}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <script src="public/plotly-latest.min.js"></script>
+    <script src="axios/dist/axios.min.js"></script>
+  </head>
+
+  <body>
+    <h1 id="title"></h1>
+    <div id="chart"></div>
+  </body>
+
+  <script>
+    function getData() {
+      return Math.random();
+    }
+
+    Plotly.plot('chart',[{
+      y:[getData()],
+      type:'line'
+    }]);
+
+    let cnt = 0;
+    setInterval(function() {
+      axios.get("http://localhost:8080/history").then(res => {
+        let data = res.data.data
+        Plotly.restyle('chart', {'y' : [data]});
+        document.getElementById("title").innerHTML = `Monitoring ${res.data.id}`
+      }).catch(err => {
+        console.log(err);
+      })
+    }, 1000);
+
+
+  </script>
+
+</html>
