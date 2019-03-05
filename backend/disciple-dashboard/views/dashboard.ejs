@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <link rel="stylesheet" href="public/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP" rel="stylesheet">
+    <script src="public/plotly-latest.min.js"></script>
+    <script src="axios/dist/axios.min.js"></script>
+  </head>
+
+  <body>
+    <header>
+      <h1>Asclepios Monitor</h1>
+    </header>
+    <section>
+      <h1 id="title"></h1>
+      <div id="chart"></div>
+    </section>
+    <section id="controls">
+      <button type="">Control 1</button>
+      <button type="">Control 2</button>
+      <button type="">Control 3</button>
+    </section>
+  </body>
+
+  <script>
+    const addZeros = num => {
+      if(num < 10) {
+        return '0'+num.toString();
+      } else {
+        return num.toString();
+      }
+    }
+    const getLastSeconds = (offset) => {
+      let result = []
+      let date = new Date()
+      for(let i=0; i<offset; i++) {
+        result.unshift(date);
+        date = new Date(date.getTime() - 1000);
+      }
+      console.log(result.map(date => {
+        return `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${addZeros(date.getSeconds())}`
+      }))
+      return result.map(date => {
+        return `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()} ${addZeros(date.getHours())}:${addZeros(date.getMinutes())}:${addZeros(date.getSeconds())}`
+      })
+    }
+
+    Plotly.plot('chart',[{
+      y:[],
+      x:[],
+      type:'line',
+      mode: 'lines+markers',
+      marker: {
+        color: '#302b63',
+        size: 8,
+      },
+      line: {
+        color: '#302b63',
+        width: 1,
+        shape : "spline"
+      }
+    }], {
+      title:'Last 100 seconds',
+      height: 300,
+      margin: {
+        l: 50,
+        r: 50,
+        b: 40,
+        t: 40,
+        pad: 4
+      },
+      paper_bgcolor: 'white',
+      plot_bgcolor: 'rgba(255, 255 255, 0.4)',
+    });
+
+    let cnt = 0;
+    setInterval(function() {
+      axios.get("http://localhost:8080/history").then(res => {
+        let data = res.data.data
+        Plotly.restyle('chart', {'y' : [data], x : [getLastSeconds(data.length)]});
+        document.getElementById("title").innerHTML = `Monitoring ${res.data.name}`
+      }).catch(err => {
+        console.log(err);
+      })
+    }, 1000);
+
+
+  </script>
+
+</html>

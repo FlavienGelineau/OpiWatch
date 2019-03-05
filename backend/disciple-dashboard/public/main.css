@@ -1,0 +1,39 @@
+body, html {
+    background: #0f0c29;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+h1, h2, h3, p {
+    color: white
+}
+
+h1 {
+    text-align: center;
+}
+
+button {
+    background-color: #667db6;
+    min-width: 150px;
+    font-size : 1rem;
+    padding: 15px;
+    border: 0px solid transparent;
+    border-radius: 50px;
+    cursor : pointer;
+    color : white;
+}
+
+#chart {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#controls {
+    display: flex;
+    flex-flow: row nowrap;
+    width : 80%;
+    margin: auto;
+    margin-top : 20px;
+    justify-content: space-around;
+}
