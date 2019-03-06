@@ -1,0 +1,12 @@
+{
+    "development": {
+        "config_id": "development",
+        "app_name": "asclepios-disciple",
+        "node_port": 8080
+    },
+    "production": {
+        "config_id": "production",
+        "app_name": "asclepios-disciple",
+        "node_port": 8080
+    }
+}
