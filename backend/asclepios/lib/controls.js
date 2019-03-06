@@ -11,7 +11,7 @@ let controls = {};
 
 // Register a patient from the uri of it's generator
 // No data is saved at this point
-controls.registerPatient = async (uri) => {
+controls.register = async (uri) => {
     return new Promise(async (resolve, reject) => {
         try {
             let res = await axios.get('http://' + uri+'/history')
@@ -22,6 +22,17 @@ controls.registerPatient = async (uri) => {
             let patient = new db.models.patient(res);
             let result = await patient.save();
             resolve(result);
+        } catch(err) {
+            reject(err);
+        }
+    })
+}
+
+controls.unregister = async(name) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let res = await db.models.patient.deleteOne({name : name});
+            resolve(res);
         } catch(err) {
             reject(err);
         }

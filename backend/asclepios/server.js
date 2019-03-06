@@ -1,5 +1,4 @@
 const express = require("express");
-const cron = require('node-cron');
 const mongoose = require('mongoose')
 
 const envt = process.env.NODE_ENV || 'developpment';
@@ -12,12 +11,23 @@ let app = express();
 
 app.get('/register', async function(req, res) {
     try {
-        let registered = await controls.registerPatient("192.168.50.100:49160");
+        let registered = await controls.register("192.168.50.100:49160");
         res.status(200);
         res.send({ result : registered });
     } catch(error) {
         res.status(500);
         res.send({ error })
+    }
+})
+
+app.get('/unregister/:name', async function(req, res) {
+    try {
+        let result = await controls.unregister(req.params.name);
+        res.status(200);
+        res.send(result);
+    } catch(error) {
+        res.status(500);
+        res.send({ error });
     }
 })
 
@@ -27,12 +37,13 @@ app.get('/patient/:name', async function(req, res) {
         res.status(200);
         res.send(patient);
     } catch(error) {
+        console.log(error)
         res.status(500);
         res.send({ error });
     }
 })
 
-cron.schedule('0-59 * * * * *', async () => {
+setInterval(async () => {
     try {
         let patients = await controls.findAll();
         for(let i=0; i<patients.length; i++){
@@ -41,7 +52,7 @@ cron.schedule('0-59 * * * * *', async () => {
     } catch(err) {
         console.log("Error occured in cron")
     }
-})
+}, 200)
 
 const start = () => {
     app.listen(config.node_port, () => {
@@ -52,8 +63,9 @@ const start = () => {
 mongoose.connect(config.database_uri, db.config)
     .then(() => {
         console.log(`Succesfully connected to database at uri ${config.database_uri}`);
-        start()
+        start();
     })
     .catch((err) => {
+        console.log(err);
         console.log(`Could not reach database at uri ${config.database_uri}`);
     });

@@ -1,7 +1,7 @@
 {
     "developpment" : {
         "node_port" : 8080,
-        "database_uri" : "mongodb://mongo:27017/asclepios",
+        "database_uri" : "mongodb://localhost:27017/asclepios",
         "generator_port" : 49160
     },
     "production" : {
