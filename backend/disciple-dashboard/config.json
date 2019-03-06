@@ -4,14 +4,6 @@
         "app_name": "asclepios-disciple-dashboard",
         "node_port": 3000
     },
-    "testing": {
-        "config_id": "testing",
-        "app_name": "asclepios-disciple-dashboard"
-    },
-    "staging": {
-        "config_id": "staging",
-        "app_name": "asclepios-disciple-dashboard"
-    },
     "production": {
         "config_id": "production",
         "app_name": "asclepios-disciple-dashboard",

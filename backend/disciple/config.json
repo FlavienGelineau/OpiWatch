@@ -4,14 +4,6 @@
         "app_name": "asclepios-disciple",
         "node_port": 8080
     },
-    "testing": {
-        "config_id": "testing",
-        "app_name": "asclepios-disciple"
-    },
-    "staging": {
-        "config_id": "staging",
-        "app_name": "asclepios-disciple"
-    },
     "production": {
         "config_id": "production",
         "app_name": "asclepios-disciple",
