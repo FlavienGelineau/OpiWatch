@@ -3,5 +3,10 @@
         "node_port" : 8081,
         "database_uri" : "mongodb://localhost/asclepios",
         "generator_port" : 8080
+    },
+    "production" : {
+        "node_port" : 8081,
+        "database_uri" : "mongodb://localhost/asclepios",
+        "generator_port" : 8080
     }
 }

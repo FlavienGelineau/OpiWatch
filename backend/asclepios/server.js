@@ -1,5 +1,4 @@
 const express = require("express");
-const bodyParser = require('body-parser');
 const cron = require('node-cron');
 
 const envt = process.env.NODE_ENV || 'developpment';

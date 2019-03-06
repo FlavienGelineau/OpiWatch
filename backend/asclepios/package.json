@@ -1,17 +1,17 @@
 {
   "name": "receptor",
   "version": "1.0.0",
-  "description": "central server for opiwatch",
-  "main": "index.js",
+  "description": "central data server for opiwatch",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "start-dev": "nodemon server.js",
+    "start": "node server.js"
   },
   "author": "Maxence Lecanu",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.18.0",
-    "body-parser": "^1.18.3",
     "express": "^4.16.4",
     "mongoose": "^5.4.17",
     "node-cron": "^2.0.3"
