@@ -20,17 +20,25 @@ let history = []
 Cron jobs for generating data every second
 The generated data is appened to the file logs/history.txt
 ======================================== */
-cron.schedule('0-59 * * * * *', () => {
+// cron.schedule('0-59 * * * * *', () => {
+//     let generated = random.number(MIN_RAND, MAX_RAND);
+//     // fs.appendFile('./logs/history.txt', generated.toString() + '\n', (err) => {
+//     //     if (err) throw err;
+//     //     console.log(`The data ${generated} was appened to history file`);
+//     // });
+//     history.push(generated);
+//     if(history.length > MAX_HISTORY_LENGTH){
+//         history.shift();
+//     }
+// })
+
+setInterval(() => {
     let generated = random.number(MIN_RAND, MAX_RAND);
-    // fs.appendFile('./logs/history.txt', generated.toString() + '\n', (err) => {
-    //     if (err) throw err;
-    //     console.log(`The data ${generated} was appened to history file`);
-    // });
     history.push(generated);
     if(history.length > MAX_HISTORY_LENGTH){
         history.shift();
     }
-})
+}, 1000)
 
 /* ========================================
 Sending the current history to the requester
@@ -49,7 +57,7 @@ app.get('/history', function(req, res) {
     //         throw err;
     //     }
     // })
-    res.header("Access-Control-Allow-Origin", "http://localhost:3000");
+    res.header("Access-Control-Allow-Origin", "http://localhost:49161");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     res.status(200);
     res.contentType("text/plain");

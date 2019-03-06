@@ -3,13 +3,14 @@ var mongoose = require('mongoose');
 const envt = process.env.NODE_ENV || 'developpment';
 const config = require('../config.json')[envt];
 
-
-mongoose.connect(config.database_uri, { useNewUrlParser : true, useCreateIndex : true });
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-  console.log(`Succesfully connected to database at uri ${config.database_uri}`)
-});
+const mongoConfig = { 
+    useNewUrlParser : true,
+    useCreateIndex : true,
+    autoReconnect : true,
+    reconnectTries: Number.MAX_VALUE,
+    reconnectInterval: 500,
+    connectTimeoutMS: 10000,
+}
 
 let patientSchema = new mongoose.Schema({
     name : {
@@ -31,7 +32,7 @@ let patientSchema = new mongoose.Schema({
 let Patient = mongoose.model('Patient', patientSchema);
 
 module.exports = {
-    connection : db,
+    config : mongoConfig,
     models : {
         patient : Patient
     }

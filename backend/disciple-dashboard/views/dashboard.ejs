@@ -36,11 +36,8 @@
       let date = new Date()
       for(let i=0; i<offset; i++) {
         result.unshift(date);
-        date = new Date(date.getTime() - 1000);
+        date = new Date(date.getTime() - 500);
       }
-      console.log(result.map(date => {
-        return `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()} ${date.getHours()}:${date.getMinutes()}:${addZeros(date.getSeconds())}`
-      }))
       return result.map(date => {
         return `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()} ${addZeros(date.getHours())}:${addZeros(date.getMinutes())}:${addZeros(date.getSeconds())}`
       })
@@ -74,16 +71,17 @@
       plot_bgcolor: 'rgba(255, 255 255, 0.4)',
     });
 
-    let cnt = 0;
+    let first = true;
     setInterval(function() {
-      axios.get("http://localhost:8080/history").then(res => {
+      axios.get("http://localhost:49160/history").then(res => {
         let data = res.data.data
         Plotly.restyle('chart', {'y' : [data], x : [getLastSeconds(data.length)]});
         document.getElementById("title").innerHTML = `Monitoring ${res.data.name}`
+        document.title = res.data.name
       }).catch(err => {
         console.log(err);
       })
-    }, 1000);
+    }, 100);
 
 
   </script>

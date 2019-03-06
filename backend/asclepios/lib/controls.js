@@ -21,7 +21,7 @@ controls.registerPatient = async (uri) => {
             res.local_uri = 'http://' + uri+'/history';
             let patient = new db.models.patient(res);
             let result = await patient.save();
-            resolve(result)
+            resolve(result);
         } catch(err) {
             reject(err);
         }
