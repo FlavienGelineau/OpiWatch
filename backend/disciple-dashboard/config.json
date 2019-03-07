@@ -2,7 +2,7 @@
     "development": {
         "config_id": "development",
         "app_name": "asclepios-disciple-dashboard",
-        "node_port": 8080
+        "node_port": 8081
     },
     "production": {
         "config_id": "production",
