@@ -24,6 +24,42 @@
   </body>
 
   <script>
+    const resetPlotData = (color) => {
+      return (
+        {
+          x: [],
+          y: [],
+          type:'line',
+          mode: 'lines+markers',
+          marker: {
+            color: color,
+            size: 8,
+          },
+          line: {
+            color: color,
+            width: 1,
+            shape : "spline"
+          }
+        }
+      )
+    }
+
+    const reset = (colors) => {
+      let result = []
+      for(let i=0; i<colors.length; i++){
+        result.push(resetPlotData(colors[i]))
+      }
+      return result
+    }
+
+    const empty = (length) => {
+      result = [];
+      for(let i=0; i<length; i++){
+        result.push([])
+      }
+      return result
+    }
+
     const addZeros = num => {
       if(num < 10) {
         return '0'+num.toString();
@@ -43,21 +79,11 @@
       })
     }
 
-    Plotly.plot('chart',[{
-      y:[],
-      x:[],
-      type:'line',
-      mode: 'lines+markers',
-      marker: {
-        color: '#302b63',
-        size: 8,
-      },
-      line: {
-        color: '#302b63',
-        width: 1,
-        shape : "spline"
-      }
-    }], {
+    var indexMap = ["RESP", "PLETH", "II" , "V", "AVR"]
+    var colors = ['#302b63', 'red', 'green', 'blue', 'black']
+    var historics = reset(colors)
+
+    Plotly.plot('chart', historics, {
       title:'Last 100 seconds',
       height: 300,
       margin: {
@@ -73,11 +99,26 @@
 
     let first = true;
     setInterval(function() {
-      axios.get("http://localhost:49160/history").then(res => {
-        let data = res.data.data
-        Plotly.restyle('chart', {'y' : [data], x : [getLastSeconds(data.length)]});
-        document.getElementById("title").innerHTML = `Monitoring ${res.data.name}`
-        document.title = res.data.name
+      axios.get("http://localhost:8080/history").then(async res => {
+        let newData = res.data.data
+        let historicsUpdate = {
+          x : empty(historics.length),
+          y : empty(historics.length)
+        };
+        console.log(newData)
+        for(let i=0; i<newData.length; i++){
+          for(let j=0; j<historics.length; j++){
+            historicsUpdate.x[j].push(newData[i]["time"]);
+            historicsUpdate.y[j].push(newData[i][indexMap[j]]);
+          }
+        }
+        Plotly.restyle('chart', historicsUpdate, [0, 1, 2, 3, 4])
+        
+        if(first) {
+          document.getElementById("title").innerHTML = `Monitoring ${res.data.name}`
+          document.title = res.data.name
+          first = false
+        }
       }).catch(err => {
         console.log(err);
       })

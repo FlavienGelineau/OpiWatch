@@ -1,20 +1,37 @@
 const express = require('express');
-const envt = process.env.NODE_ENV || 'development';
-const config = require('./config.json')[envt];
 const fs = require('fs');
-const cron = require('node-cron');
 const ip = require('ip');
 
+const envt = process.env.NODE_ENV || 'development';
+const config = require('./config.json')[envt];
+
 const random = require('./utils/random');
+const generator = require('./utils/generator');
 
 let app = express();
 
-const MIN_RAND = 0;
-const MAX_RAND = 100;
-const MAX_HISTORY_LENGTH = 100
-const ID = random.string(10);
+const MAX_HISTORY_LENGTH = 100;
+const ID = 'bidmc_05';
+
+const mockFilename = 'bidmc_05_Signals.csv';
 
 let history = []
+const data = generator.format(mockFilename)
+    .then(data => {
+        index = 0;
+        setInterval(() => {
+            let generated = data[index];
+            index = (index + 1) % data.length;
+            history.push(generated);
+            if(history.length > MAX_HISTORY_LENGTH){
+                history.shift();
+            }
+        }, 8);
+    })
+    .catch( err => {
+        console.log(`Error when loading mock data with file ${mockFilename}`);
+        return null;
+    })
 
 /* ========================================
 Cron jobs for generating data every second
@@ -31,14 +48,6 @@ The generated data is appened to the file logs/history.txt
 //         history.shift();
 //     }
 // })
-
-setInterval(() => {
-    let generated = random.number(MIN_RAND, MAX_RAND);
-    history.push(generated);
-    if(history.length > MAX_HISTORY_LENGTH){
-        history.shift();
-    }
-}, 1000)
 
 /* ========================================
 Sending the current history to the requester
@@ -57,7 +66,11 @@ app.get('/history', function(req, res) {
     //         throw err;
     //     }
     // })
-    res.header("Access-Control-Allow-Origin", "http://localhost:49161");
+    if(envt == "development") {
+        res.header("Access-Control-Allow-Origin", "http://localhost:8081");
+    } else {
+        res.header("Access-Control-Allow-Origin", "http://localhost:49161");
+    }
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     res.status(200);
     res.contentType("text/plain");
@@ -82,16 +95,7 @@ app.get('/clear', function(req, res) {
     })
 })
 
-app.listen(config.node_port, () => {
-    // clean history when launching new instance
-    console.log("Cleaning history...")
-    fs.writeFile('./logs/history.txt', '', err => {
-        if(!err) {
-            console.log("Succesfully cleaned history");
-        } else {
-            throw err;
-        }
-    })
+app.listen(config.node_port, async () => {
     console.log(`Server listening on port ${config.node_port}`)
     console.log(`Server local uri : ${ip.address()}:${config.node_port}`)
 })
