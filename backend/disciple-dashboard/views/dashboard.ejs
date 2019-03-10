@@ -2,10 +2,20 @@
 <html>
 
   <head>
-    <link rel="stylesheet" href="public/main.css">
+    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP" rel="stylesheet">
-    <script src="public/plotly-latest.min.js"></script>
-    <script src="axios/dist/axios.min.js"></script>
+
+    <!-- MQTT protocol support on js -->
+    <script src="https://unpkg.com/mqtt@2.18.8/dist/mqtt.min.js"></script>
+
+    <!-- Imports for Rickshaw -->
+    <script src="rickshaw/vendor/d3.min.js"></script>
+    <script src="rickshaw/vendor/d3.layout.min.js"></script>
+    <script src="rickshaw/rickshaw.min.js"></script>
+    <link rel="stylesheet" href="rickshaw/rickshaw.min.css">
+
+    <!-- Application stylesheet -->
+    <link rel="stylesheet" href="public/main.css">
   </head>
 
   <body>
@@ -13,117 +23,163 @@
       <h1>Asclepios Monitor</h1>
     </header>
     <section>
-      <h1 id="title"></h1>
-      <div id="chart"></div>
+      <h1 id="title">Connectez vous à un emetteur</h1>
+      <form id="uri-form" onsubmit="return start();">
+        <input type="text" name="emettor-uri" onclick="start">
+      </form>
+      <div id="chart-container">
+        <div id="chart"></div>
+      </div>
     </section>
     <section id="controls">
-      <button type="">Control 1</button>
-      <button type="">Control 2</button>
-      <button type="">Control 3</button>
+      <button id="play-pause-button" class="gray" onclick="pause(event)">Pause</button>
+      <button class="warning" onclick="reset()">Reset</button>
+      <button class="danger">Trigger problem</button>
     </section>
   </body>
 
   <script>
-    const resetPlotData = (color) => {
-      return (
-        {
-          x: [],
-          y: [],
-          type:'line',
-          mode: 'lines+markers',
-          marker: {
-            color: color,
-            size: 8,
-          },
-          line: {
-            color: color,
-            width: 1,
-            shape : "spline"
+
+    var data = {}
+    var xLabel = 'time'
+    var refreshDelay = 20; // ms
+    var graph;
+    var updateProcess;
+    var client;
+    var firstMessage;
+
+    // Initialize a new graph
+    const initialize = () => {
+      return new Rickshaw.Graph({
+        element: document.getElementById("chart"),
+        width: 900,
+        height: 200,
+        renderer: 'line',
+        series: getRickshawFormat(data)
+      });
+    }
+
+    // Pause the graph display, but keeps collecting messages
+    const pause = (event) => {
+      if(typeof(updateProcess) !== "undefined"){
+        clearInterval(updateProcess);
+        event.target.classList.remove('gray');
+        event.target.classList.add('success');
+        event.target.innerHTML = "Play";
+        event.target.onclick = play;
+      }
+    }
+
+    const play = (event) => {
+      updateProcess = setInterval(() => {
+        let p = graph.series.active;
+        graph.series = getRickshawFormat(data);
+        graph.series.active = p;
+        graph.update();
+      }, refreshDelay);
+      event.target.classList.add('gray');
+      event.target.classList.remove('success');
+      event.target.innerHTML = "Pause";
+      event.target.onclick = pause;
+    }
+
+    // This function reset the graph and stops the connection
+    const reset = () => {
+      if(typeof(updateProcess) !== "undefined"){
+        clearInterval(updateProcess);
+        let button = document.getElementById('play-pause-button')
+        button.classList.add('gray');
+        button.classList.remove('success');
+        button.innerHTML = "Pause";
+        button.onclick = pause;
+      }
+      if(typeof(client) !== "undefined" && client.connected){
+        client.end()
+      }
+      data = {}
+      document.getElementById('chart-container').innerHTML = '<div id="chart"></div>';
+      firstMessage = true;
+      console.log("Succesfully connected")
+      document.getElementById("title").innerHTML = "Connectez-vous à un emetteur"
+      document.title = "Opiwatch Generator Monitor"
+    }
+
+    const getRickshawFormat = (d) => {
+      result = []
+      for(let key in d){
+        if(d.hasOwnProperty(key)){
+          result.push({
+            name : key,
+            color: 'steelblue',
+            data: d[key]
+          })
+        }
+      }
+      return result;
+    }
+
+    const start = () => {
+      // Instanciate a new graph
+      reset();
+      graph = initialize()
+      graph.render();
+
+      try {
+        // Retrive form values
+        let topic = document.getElementById('uri-form').querySelector('input[name="emettor-uri"]').value
+        // Launch a connection with the mqtt broker, and subscribe to the input topic
+        client = mqtt.connect("mqtt://localhost:9001");
+        client.on('connect', () => {
+          console.log("Succesfully connected")
+          document.getElementById("title").innerHTML = `Monitoring ${topic}`
+          document.title = topic
+        });
+        client.subscribe(topic);
+
+        // Update the data local storage when new data is received
+        client.on('message', function (topic, message) {
+          let newData = JSON.parse(message.toString());
+          if(firstMessage) {
+            for(let key in newData) {
+              if(newData.hasOwnProperty(key) && key !== xLabel){
+                data[key] = [{
+                  x : newData[xLabel],
+                  y : newData[key]
+                }]
+              }
+            }
+            firstMessage = false;
+          } else {
+            for(let key in newData) {
+              if(newData.hasOwnProperty(key) && key !== xLabel){
+                data[key].push({
+                  x : newData[xLabel],
+                  y : newData[key]
+                });
+                if(data[key].length > 100){
+                  data[key].shift();
+                }
+              }
+            }
           }
-        }
-      )
-    }
+        })
+        // Update the chart every ${refreshDelay} milliseconds
+        updateProcess = setInterval(() => {
+          let p = graph.series.active;
+          graph.series = getRickshawFormat(data);
+          graph.series.active = p;
+          graph.update();
+        }, refreshDelay)
+        // Do not submit
+        return false;
 
-    const reset = (colors) => {
-      let result = []
-      for(let i=0; i<colors.length; i++){
-        result.push(resetPlotData(colors[i]))
-      }
-      return result
-    }
-
-    const empty = (length) => {
-      result = [];
-      for(let i=0; i<length; i++){
-        result.push([])
-      }
-      return result
-    }
-
-    const addZeros = num => {
-      if(num < 10) {
-        return '0'+num.toString();
-      } else {
-        return num.toString();
-      }
-    }
-    const getLastSeconds = (offset) => {
-      let result = []
-      let date = new Date()
-      for(let i=0; i<offset; i++) {
-        result.unshift(date);
-        date = new Date(date.getTime() - 500);
-      }
-      return result.map(date => {
-        return `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()} ${addZeros(date.getHours())}:${addZeros(date.getMinutes())}:${addZeros(date.getSeconds())}`
-      })
-    }
-
-    var indexMap = ["RESP", "PLETH", "II" , "V", "AVR"]
-    var colors = ['#302b63', 'red', 'green', 'blue', 'black']
-    var historics = reset(colors)
-
-    Plotly.plot('chart', historics, {
-      title:'Last 100 seconds',
-      height: 300,
-      margin: {
-        l: 50,
-        r: 50,
-        b: 40,
-        t: 40,
-        pad: 4
-      },
-      paper_bgcolor: 'white',
-      plot_bgcolor: 'rgba(255, 255 255, 0.4)',
-    });
-
-    let first = true;
-    setInterval(function() {
-      axios.get("http://localhost:8080/history").then(async res => {
-        let newData = res.data.data
-        let historicsUpdate = {
-          x : empty(historics.length),
-          y : empty(historics.length)
-        };
-        console.log(newData)
-        for(let i=0; i<newData.length; i++){
-          for(let j=0; j<historics.length; j++){
-            historicsUpdate.x[j].push(newData[i]["time"]);
-            historicsUpdate.y[j].push(newData[i][indexMap[j]]);
-          }
-        }
-        Plotly.restyle('chart', historicsUpdate, [0, 1, 2, 3, 4])
-        
-        if(first) {
-          document.getElementById("title").innerHTML = `Monitoring ${res.data.name}`
-          document.title = res.data.name
-          first = false
-        }
-      }).catch(err => {
+      } catch(err) {
         console.log(err);
-      })
-    }, 100);
-
+        // Do not submit
+        return false
+      }
+    return false
+    }
 
   </script>
 

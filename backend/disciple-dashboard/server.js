@@ -9,7 +9,7 @@ let app = express();
 
 app.set('view engine', 'ejs');
 app.use('/public', express.static('./public'));
-app.use('/axios', express.static('./node_modules/axios'));
+app.use('/rickshaw', express.static('./node_modules/rickshaw'));
 
 app.get('/dashboard', function(req, res) {
     res.status(200);

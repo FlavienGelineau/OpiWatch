@@ -24,6 +24,34 @@ button {
     color : white;
 }
 
+#uri-form {
+    width : 100%;
+    display : flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+}
+
+#uri-form input {
+    height : 30px;
+    line-height : 30px;
+    font-size : 16px;
+    text-align : center;
+    margin : auto;
+    border-radius : 50px;
+    border : 0px solid transparent;
+}
+
+input:focus, button:focus {
+    outline: none;
+}
+
+#chart-container {
+    width : 900px;
+    margin : auto;
+    margin-top : 50px;
+    margin-bottom : 50px;
+}
+
 #chart {
     border-radius: 10px;
     overflow: hidden;
@@ -36,4 +64,24 @@ button {
     margin: auto;
     margin-top : 20px;
     justify-content: space-around;
+}
+
+.danger {
+    background-color: #f44336;
+    color : black;
+}
+
+.success {
+    background-color: #4CAF50;
+    color : white;
+}
+
+.gray {
+    background-color: #e7e7e7; 
+    color: black;
+}
+
+.warning {
+    background-color: #e2e600; 
+    color: black;
 }
