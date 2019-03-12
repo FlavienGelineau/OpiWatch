@@ -58,7 +58,7 @@ input:focus, button:focus {
 }
 
 #controls {
-    display: flex;
+    display: none;
     flex-flow: row nowrap;
     width : 80%;
     margin: auto;

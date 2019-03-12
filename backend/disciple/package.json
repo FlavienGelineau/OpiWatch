@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "chalk": "^2.4.2",
     "csvtojson": "^2.0.8",
     "express": "^4.16.4",
     "ip": "^1.1.5",
