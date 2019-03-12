@@ -1,39 +1,19 @@
-var mongoose = require('mongoose');
+const mongoose = require('mongoose');
+const colors = require('./colors');
 
-const envt = process.env.NODE_ENV || 'developpment';
-const config = require('../config.json')[envt];
+module.exports = config => {
+  const url = config.database_uri;
+  mongoose.connect(url, config.options);
 
-const mongoConfig = { 
-    useNewUrlParser : true,
-    useCreateIndex : true,
-    autoReconnect : true,
-    reconnectTries: Number.MAX_VALUE,
-    reconnectInterval: 500,
-    connectTimeoutMS: 10000,
-}
+  mongoose.connection.on('connected', function(){
+    console.log(colors.connected("Mongoose default connection is open to ", colors.bold(url)));
+  });
 
-let patientSchema = new mongoose.Schema({
-    name : {
-        type : String,
-        required : true,
-        unique : true,
-        index : true,
-    },
-    local_uri : {
-        type : String,
-        required : true
-    },
-    history : {
-        type : Array,
-        default : []
-    }
-})
+  mongoose.connection.on('error', function(err){
+    console.log(colors.error("Mongoose default connection has occured "+colors.bold(err)+" error"));
+  });
 
-let Patient = mongoose.model('Patient', patientSchema);
-
-module.exports = {
-    config : mongoConfig,
-    models : {
-        patient : Patient
-    }
+  mongoose.connection.on('disconnected', function(){
+    console.log(colors.disconnected("Mongoose default connection is disconnected"));
+  });
 }

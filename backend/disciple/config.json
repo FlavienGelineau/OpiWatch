@@ -8,6 +8,7 @@
     "production": {
         "config_id": "production",
         "app_name": "asclepios-disciple",
-        "node_port": 8080
+        "node_port": 8080,
+        "broker_uri": "mqtt://localhost:1883"
     }
 }

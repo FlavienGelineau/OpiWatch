@@ -102,6 +102,9 @@
       console.log("Succesfully connected")
       document.getElementById("title").innerHTML = "Connectez-vous à un emetteur"
       document.title = "Opiwatch Generator Monitor"
+      // Display controls button
+      document.getElementById('controls').style.display = "none";
+      document.getElementById('uri-form').style.display = "flex";
     }
 
     const getRickshawFormat = (d) => {
@@ -136,7 +139,7 @@
         });
         client.subscribe(topic);
 
-        // Update the data local storage when new data is received
+        // Update the local storage when new data is received
         client.on('message', function (topic, message) {
           let newData = JSON.parse(message.toString());
           if(firstMessage) {
@@ -163,6 +166,7 @@
             }
           }
         })
+
         // Update the chart every ${refreshDelay} milliseconds
         updateProcess = setInterval(() => {
           let p = graph.series.active;
@@ -170,6 +174,11 @@
           graph.series.active = p;
           graph.update();
         }, refreshDelay)
+
+        // Display controls button
+        document.getElementById('controls').style.display = "flex";
+        document.getElementById('uri-form').style.display = "none";
+
         // Do not submit
         return false;
 
