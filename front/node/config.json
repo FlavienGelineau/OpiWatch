@@ -1,0 +1,12 @@
+{
+    "development": {
+        "config_id": "development",
+        "app_name": "asclepios-dashboard",
+        "node_port": 3000
+    },
+    "production": {
+        "config_id": "production",
+        "app_name": "asclepios-dashboard",
+        "node_port": 3000
+    }
+}
