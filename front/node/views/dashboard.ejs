@@ -1,0 +1,223 @@
+<html>
+  <head>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+JP" rel="stylesheet">
+
+    <!-- MQTT protocol support on js -->
+    <script src="https://unpkg.com/mqtt@2.18.8/dist/mqtt.min.js"></script>
+
+    <!-- Imports for Rickshaw -->
+    <script src="rickshaw/vendor/d3.min.js"></script>
+    <script src="rickshaw/vendor/d3.layout.min.js"></script>
+    <script src="rickshaw/rickshaw.min.js"></script>
+    <link rel="stylesheet" href="rickshaw/rickshaw.min.css">
+
+    <!-- Application stylesheet -->
+    <link rel="stylesheet" href="public/main.css">
+  </head>
+
+  <body>
+    <!-- Header -->
+    <header>
+      <h1>Opiwatch Dashboard</h1>
+      <p id="connect-status">Not connected</p>
+    </header>
+
+    <!-- Dashboard -->
+    <section>
+      <div class="dashboard">
+        <div class="watcher">
+          <h3 class="advice">Connectez vous à un emetteur</h1>
+          <form class="uri-form" onsubmit="return start(event);">
+            <input type="text" name="uri" value="">
+          </form>
+        </div>
+        <div id="add-controls">
+          <div class="gray add-button" onclick="add(event)">+</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      
+    </footer>
+    
+  </body>
+
+  <script>
+
+    const add = (event) => {
+      let dashboard = document.getElementsByClassName('dashboard')[0];
+      let htmlString = `
+      <h3 class="advice">Connectez vous à un emetteur</h1>
+      <form class="uri-form" onsubmit="return start(event);">
+        <input type="text" name="uri" value="">
+      </form>
+      `
+      let el = document.createElement('div');
+      el.classList.add('watcher');
+      el.innerHTML = htmlString;
+      dashboard.insertBefore(el, dashboard.children[dashboard.children.length - 1]);
+    } 
+
+    client = mqtt.connect("mqtt://localhost:9001");
+    client.on('connect', () => {
+      console.log("Succesfully connected")
+      document.getElementById("connect-status").innerHTML = `Connected`
+      document.getElementById("connect-status").style.backgroundColor = "#4CAF50"
+    })
+
+    var data = {}
+    var updateProcesses = {}
+    var graphs = {}
+    var xLabel = "time";
+    var refreshDelay = 100;
+    var graphHeight = document.getElementsByClassName('watcher')[0].clientHeight;
+    client.on('message', (topic, message) => {
+      let newData = JSON.parse(message.toString());
+      if(data.hasOwnProperty(topic)){
+        for(let key in newData) {
+          if(newData.hasOwnProperty(key) && key !== xLabel){
+            data[topic][key].push({
+              x : newData[xLabel],
+              y : newData[key]
+            });
+            if(data[topic][key].length > 100){
+              data[topic][key].shift();
+            }
+          }
+        }
+      } else {
+        data[topic] = {}
+        for(let key in newData) {
+          if(newData.hasOwnProperty(key) && key !== xLabel){
+            data[topic][key] = [{
+              x : newData[xLabel],
+              y : newData[key]
+            }]
+          }
+        }
+      }
+    })
+
+    const getRickshawFormat = (d) => {
+      result = []
+      for(let key in d){
+        if(d.hasOwnProperty(key)){
+          result.push({
+            name : key,
+            color: 'steelblue',
+            data: d[key]
+          })
+        }
+      }
+      return result;
+    }
+
+    const initialize = (element, options) => {
+      /* This function initializes a graph in the div $element */
+      return new Rickshaw.Graph({
+        element: element,
+        width: options.width ? options.width : 900,
+        height: options.height ? options.height : 200,
+        renderer: 'line',
+        min : 0,
+        max : 1,
+        series: getRickshawFormat({})
+      });
+    }
+
+    const start = (event) => {
+      // Retrieve input value
+      let topic = new FormData(event.target).get('uri')
+
+      // Replace the watcher input form with the div containing the chart
+      let watcher = event.target.parentNode
+      watcher.innerHTML = `
+      <h3>${topic}</h3>
+      <div class="chart">
+      
+      </div>
+      <div class="controls">
+        <button class="play-pause-button" class="gray" onclick="pause(event, '${topic}')">Pause</button>
+        <button class="warning" onclick="reset(event, '${topic}')">Reset</button>
+        <button class="danger">Trigger problem</button>
+      </div>
+      
+      `
+      let options = {width : watcher.clientWidth, height : graphHeight}
+      graphs[topic] = initialize(watcher.getElementsByClassName("chart")[0], options)
+
+      client.subscribe(topic, function() {
+        console.log("listening to topic", topic) 
+      });
+
+      updateProcesses[topic] = setInterval(() => {
+        let p = graphs[topic].series.active;
+        graphs[topic].series = getRickshawFormat(data[topic]);
+        graphs[topic].series.active = p;
+        graphs[topic].update();
+      }, refreshDelay)
+
+      return false
+    }
+
+    const pause = (event, topic) => {
+      if(typeof(updateProcesses[topic]) !== "undefined"){
+        clearInterval(updateProcesses[topic]);
+        event.target.classList.remove('gray');
+        event.target.classList.add('success');
+        event.target.innerHTML = "Play";
+        event.target.onclick = (newEvent) => {
+          play(newEvent, topic)
+        };
+      }
+    }
+
+    const play = (event, topic) => {
+      updateProcesses[topic] = setInterval(() => {
+        let p = graphs[topic].series.active;
+        graphs[topic].series = getRickshawFormat(data[topic]);
+        graphs[topic].series.active = p;
+        graphs[topic].update();
+      }, refreshDelay);
+      event.target.classList.add('gray');
+      event.target.classList.remove('success');
+      event.target.innerHTML = "Pause";
+      event.target.onclick = (newEvent) => {
+        pause(newEvent, topic)
+      };
+    }
+
+    // This function reset the graph and stops the connection
+    const reset = (event, topic) => {
+      if(typeof(updateProcesses[topic]) !== "undefined"){
+        clearInterval(updateProcesses[topic]);
+        let button = event.target.parentNode.getElementsByClassName('play-pause-button')[0]
+        button.classList.add('gray');
+        button.classList.remove('success');
+        button.innerHTML = "Pause";
+        button.onclick = (newEvent) => {
+          pause(newEvent, topic)
+        };
+      }
+      if(typeof(client) !== "undefined" && client.connected){
+        client.unsubscribe(topic, () => {
+          console.log("succesfully unsubscribed from topic", topic)
+        })
+      }
+      delete data[topic]
+      let watcher = event.target.parentNode.parentNode
+      watcher.innerHTML = `
+      <h3 class="advice">Connectez vous à un emetteur</h1>
+      <form class="uri-form" onsubmit="return start(event);">
+        <input type="text" name="uri" value="">
+      </form>
+      `;
+    }
+
+  </script>
+
+</html>
+
