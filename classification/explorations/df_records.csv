@@ -1,0 +1,550 @@
+,counter_freq,label,name,patient,signal_length
+0,,Myocardial infarction,patient001/s0010_re,patient001,38400
+1,,Myocardial infarction,patient001/s0014lre,patient001,115200
+2,,Myocardial infarction,patient001/s0016lre,patient001,115200
+3,,Myocardial infarction,patient002/s0015lre,patient002,115200
+4,,Myocardial infarction,patient003/s0017lre,patient003,115200
+5,,Myocardial infarction,patient004/s0020are,patient004,115200
+6,,Myocardial infarction,patient004/s0020bre,patient004,115200
+7,,Myocardial infarction,patient005/s0021are,patient005,115174
+8,,Myocardial infarction,patient005/s0021bre,patient005,115174
+9,,Myocardial infarction,patient005/s0025lre,patient005,115200
+10,,Myocardial infarction,patient005/s0031lre,patient005,115200
+11,,Myocardial infarction,patient005/s0101lre,patient005,115200
+12,,Myocardial infarction,patient006/s0022lre,patient006,115174
+13,,Myocardial infarction,patient006/s0027lre,patient006,115200
+14,,Myocardial infarction,patient006/s0064lre,patient006,115200
+15,,Myocardial infarction,patient007/s0026lre,patient007,115200
+16,,Myocardial infarction,patient007/s0029lre,patient007,115200
+17,,Myocardial infarction,patient007/s0038lre,patient007,115200
+18,,Myocardial infarction,patient007/s0078lre,patient007,115200
+19,,Myocardial infarction,patient008/s0028lre,patient008,115200
+20,,Myocardial infarction,patient008/s0037lre,patient008,115200
+21,,Myocardial infarction,patient008/s0068lre,patient008,115200
+22,,Myocardial infarction,patient009/s0035_re,patient009,32000
+23,,Myocardial infarction,patient010/s0036lre,patient010,115200
+24,,Myocardial infarction,patient010/s0042lre,patient010,115200
+25,,Myocardial infarction,patient010/s0061lre,patient010,115200
+26,,Myocardial infarction,patient011/s0039lre,patient011,115200
+27,,Myocardial infarction,patient011/s0044lre,patient011,115200
+28,,Myocardial infarction,patient011/s0049lre,patient011,115200
+29,,Myocardial infarction,patient011/s0067lre,patient011,32000
+30,,Myocardial infarction,patient012/s0043lre,patient012,115200
+31,,Myocardial infarction,patient012/s0050lre,patient012,115200
+32,,Myocardial infarction,patient013/s0045lre,patient013,115200
+33,,Myocardial infarction,patient013/s0051lre,patient013,115200
+34,,Myocardial infarction,patient013/s0072lre,patient013,115200
+35,,Myocardial infarction,patient014/s0046lre,patient014,115200
+36,,Myocardial infarction,patient014/s0056lre,patient014,115200
+37,,Myocardial infarction,patient014/s0071lre,patient014,115200
+38,,Myocardial infarction,patient015/s0047lre,patient015,115200
+39,,Myocardial infarction,patient015/s0057lre,patient015,115200
+40,,Myocardial infarction,patient015/s0152lre,patient015,115200
+41,,Myocardial infarction,patient016/s0052lre,patient016,115200
+42,,Myocardial infarction,patient016/s0060lre,patient016,115200
+43,,Myocardial infarction,patient016/s0076lre,patient016,115200
+44,,Myocardial infarction,patient017/s0053lre,patient017,115200
+45,,Myocardial infarction,patient017/s0055lre,patient017,115200
+46,,Myocardial infarction,patient017/s0063lre,patient017,115200
+47,,Myocardial infarction,patient017/s0075lre,patient017,115200
+48,,Myocardial infarction,patient018/s0054lre,patient018,115200
+49,,Myocardial infarction,patient018/s0059lre,patient018,115200
+50,,Myocardial infarction,patient018/s0082lre,patient018,115200
+51,,Myocardial infarction,patient019/s0058lre,patient019,115200
+52,,Myocardial infarction,patient019/s0070lre,patient019,115200
+53,,Myocardial infarction,patient019/s0077lre,patient019,115200
+54,,Myocardial infarction,patient020/s0062lre,patient020,115200
+55,,Myocardial infarction,patient020/s0069lre,patient020,115200
+56,,Myocardial infarction,patient020/s0079lre,patient020,115200
+57,,Myocardial infarction,patient021/s0065lre,patient021,115200
+58,,Myocardial infarction,patient021/s0073lre,patient021,115200
+59,,Myocardial infarction,patient021/s0097lre,patient021,115200
+60,,Myocardial infarction,patient022/s0066lre,patient022,115200
+61,,Myocardial infarction,patient022/s0074lre,patient022,87910
+62,,Myocardial infarction,patient022/s0149lre,patient022,115200
+63,,Myocardial infarction,patient023/s0080lre,patient023,115200
+64,,Myocardial infarction,patient023/s0081lre,patient023,115200
+65,,Myocardial infarction,patient023/s0085lre,patient023,115200
+66,,Myocardial infarction,patient023/s0103lre,patient023,115200
+67,,Myocardial infarction,patient024/s0083lre,patient024,115200
+68,,Myocardial infarction,patient024/s0084lre,patient024,115200
+69,,Myocardial infarction,patient024/s0086lre,patient024,115200
+70,,Myocardial infarction,patient024/s0094lre,patient024,115200
+71,,Myocardial infarction,patient025/s0087lre,patient025,115200
+72,,Myocardial infarction,patient025/s0091lre,patient025,115200
+73,,Myocardial infarction,patient025/s0150lre,patient025,115200
+74,,Myocardial infarction,patient026/s0088lre,patient026,115200
+75,,Myocardial infarction,patient026/s0095lre,patient026,115200
+76,,Myocardial infarction,patient027/s0089lre,patient027,115200
+77,,Myocardial infarction,patient027/s0096lre,patient027,115200
+78,,Myocardial infarction,patient027/s0151lre,patient027,115200
+79,,Myocardial infarction,patient028/s0090lre,patient028,115200
+80,,Myocardial infarction,patient028/s0093lre,patient028,115200
+81,,Myocardial infarction,patient028/s0108lre,patient028,115200
+82,,Myocardial infarction,patient029/s0092lre,patient029,115200
+83,,Myocardial infarction,patient029/s0098lre,patient029,115200
+84,,Myocardial infarction,patient029/s0122lre,patient029,115200
+85,,Myocardial infarction,patient030/s0099lre,patient030,115200
+86,,Myocardial infarction,patient030/s0107lre,patient030,115200
+87,,Myocardial infarction,patient030/s0117lre,patient030,115200
+88,,Myocardial infarction,patient030/s0153lre,patient030,115200
+89,,Myocardial infarction,patient031/s0100lre,patient031,115200
+90,,Myocardial infarction,patient031/s0104lre,patient031,115200
+91,,Myocardial infarction,patient031/s0114lre,patient031,115200
+92,,Myocardial infarction,patient031/s0127lre,patient031,115200
+93,,Myocardial infarction,patient032/s0102lre,patient032,115200
+94,,Myocardial infarction,patient032/s0106lre,patient032,115200
+95,,Myocardial infarction,patient032/s0115lre,patient032,115200
+96,,Myocardial infarction,patient032/s0165lre,patient032,115200
+97,,Myocardial infarction,patient033/s0105lre,patient033,115200
+98,,Myocardial infarction,patient033/s0113lre,patient033,115200
+99,,Myocardial infarction,patient033/s0121lre,patient033,115200
+100,,Myocardial infarction,patient033/s0157lre,patient033,115200
+101,,Myocardial infarction,patient034/s0109lre,patient034,115200
+102,,Myocardial infarction,patient034/s0118lre,patient034,115200
+103,,Myocardial infarction,patient034/s0123lre,patient034,115200
+104,,Myocardial infarction,patient034/s0158lre,patient034,115200
+105,,Myocardial infarction,patient035/s0110lre,patient035,115200
+106,,Myocardial infarction,patient035/s0119lre,patient035,115200
+107,,Myocardial infarction,patient035/s0124lre,patient035,115200
+108,,Myocardial infarction,patient035/s0145lre,patient035,115200
+109,,Myocardial infarction,patient036/s0111lre,patient036,115200
+110,,Myocardial infarction,patient036/s0116lre,patient036,115200
+111,,Myocardial infarction,patient036/s0126lre,patient036,115200
+112,,Myocardial infarction,patient037/s0112lre,patient037,115200
+113,,Myocardial infarction,patient037/s0120lre,patient037,115200
+114,,Myocardial infarction,patient038/s0125lre,patient038,115200
+115,,Myocardial infarction,patient038/s0128lre,patient038,115200
+116,,Myocardial infarction,patient038/s0162lre,patient038,115200
+117,,Myocardial infarction,patient039/s0129lre,patient039,115200
+118,,Myocardial infarction,patient039/s0134lre,patient039,115200
+119,,Myocardial infarction,patient039/s0164lre,patient039,115200
+120,,Myocardial infarction,patient040/s0130lre,patient040,115200
+121,,Myocardial infarction,patient040/s0131lre,patient040,115200
+122,,Myocardial infarction,patient040/s0133lre,patient040,115200
+123,,Myocardial infarction,patient040/s0219lre,patient040,115200
+124,,Myocardial infarction,patient041/s0132lre,patient041,115200
+125,,Myocardial infarction,patient041/s0136lre,patient041,115200
+126,,Myocardial infarction,patient041/s0138lre,patient041,115200
+127,,Myocardial infarction,patient041/s0276lre,patient041,115200
+128,,Myocardial infarction,patient042/s0135lre,patient042,115200
+129,,Myocardial infarction,patient042/s0137lre,patient042,115200
+130,,Myocardial infarction,patient042/s0140lre,patient042,115200
+131,,Myocardial infarction,patient042/s0347lre,patient042,115200
+132,,Myocardial infarction,patient043/s0141lre,patient043,115200
+133,,Myocardial infarction,patient043/s0144lre,patient043,115200
+134,,Myocardial infarction,patient043/s0278lre,patient043,115200
+135,,Myocardial infarction,patient044/s0142lre,patient044,115200
+136,,Myocardial infarction,patient044/s0143lre,patient044,96588
+137,,Myocardial infarction,patient044/s0146lre,patient044,115200
+138,,Myocardial infarction,patient044/s0159lre,patient044,115200
+139,,Myocardial infarction,patient045/s0147lre,patient045,115200
+140,,Myocardial infarction,patient045/s0148lre,patient045,115200
+141,,Myocardial infarction,patient045/s0155lre,patient045,115200
+142,,Myocardial infarction,patient045/s0217lre,patient045,115200
+143,,Myocardial infarction,patient046/s0156lre,patient046,115200
+144,,Myocardial infarction,patient046/s0161lre,patient046,115200
+145,,Myocardial infarction,patient046/s0168lre,patient046,115200
+146,,Myocardial infarction,patient046/s0184lre,patient046,115200
+147,,Myocardial infarction,patient047/s0160lre,patient047,115200
+148,,Myocardial infarction,patient047/s0163lre,patient047,115200
+149,,Myocardial infarction,patient047/s0167lre,patient047,115200
+150,,Myocardial infarction,patient048/s0171lre,patient048,115200
+151,,Myocardial infarction,patient048/s0172lre,patient048,115200
+152,,Myocardial infarction,patient048/s0180lre,patient048,115200
+153,,Myocardial infarction,patient048/s0277lre,patient048,115200
+154,,Myocardial infarction,patient049/s0173lre,patient049,115200
+155,,Myocardial infarction,patient049/s0178lre,patient049,115200
+156,,Myocardial infarction,patient049/s0186lre,patient049,115200
+157,,Myocardial infarction,patient049/s0314lre,patient049,115200
+158,,Myocardial infarction,patient050/s0174lre,patient050,115200
+159,,Myocardial infarction,patient050/s0177lre,patient050,115200
+160,,Myocardial infarction,patient050/s0185lre,patient050,115200
+161,,Myocardial infarction,patient050/s0215lre,patient050,115200
+162,,Myocardial infarction,patient051/s0179lre,patient051,115200
+163,,Myocardial infarction,patient051/s0181lre,patient051,115200
+164,,Myocardial infarction,patient051/s0187lre,patient051,115200
+165,,Myocardial infarction,patient051/s0213lre,patient051,115200
+166,,Myocardial infarction,patient052/s0190lre,patient052,115200
+167,,Myocardial infarction,patient053/s0191lre,patient053,115200
+168,,Myocardial infarction,patient054/s0192lre,patient054,115200
+169,,Myocardial infarction,patient054/s0195lre,patient054,115200
+170,,Myocardial infarction,patient054/s0197lre,patient054,115200
+171,,Myocardial infarction,patient054/s0218lre,patient054,115200
+172,,Myocardial infarction,patient055/s0194lre,patient055,115200
+173,,Myocardial infarction,patient056/s0196lre,patient056,115200
+174,,Myocardial infarction,patient057/s0198lre,patient057,115200
+175,,Myocardial infarction,patient058/s0216lre,patient058,115200
+176,,Myocardial infarction,patient059/s0208lre,patient059,115200
+177,,Myocardial infarction,patient060/s0209lre,patient060,115200
+178,,Myocardial infarction,patient061/s0210lre,patient061,115200
+179,,Myocardial infarction,patient062/s0212lre,patient062,115200
+180,,Myocardial infarction,patient063/s0214lre,patient063,115200
+181,,Myocardial infarction,patient064/s0220lre,patient064,115200
+182,,Myocardial infarction,patient065/s0221lre,patient065,115200
+183,,Myocardial infarction,patient065/s0226lre,patient065,115200
+184,,Myocardial infarction,patient065/s0229lre,patient065,115200
+185,,Myocardial infarction,patient065/s0282lre,patient065,115200
+186,,Myocardial infarction,patient066/s0225lre,patient066,115200
+187,,Myocardial infarction,patient066/s0231lre,patient066,115200
+188,,Myocardial infarction,patient066/s0280lre,patient066,115200
+189,,Myocardial infarction,patient067/s0227lre,patient067,115200
+190,,Myocardial infarction,patient067/s0230lre,patient067,115200
+191,,Myocardial infarction,patient067/s0283lre,patient067,115200
+192,,Myocardial infarction,patient068/s0228lre,patient068,115200
+193,,Myocardial infarction,patient069/s0232lre,patient069,115200
+194,,Myocardial infarction,patient069/s0233lre,patient069,115200
+195,,Myocardial infarction,patient069/s0234lre,patient069,115200
+196,,Myocardial infarction,patient069/s0284lre,patient069,115200
+197,,Myocardial infarction,patient070/s0235lre,patient070,115200
+198,,Myocardial infarction,patient071/s0236lre,patient071,115200
+199,,Myocardial infarction,patient072/s0237lre,patient072,115200
+200,,Myocardial infarction,patient072/s0240lre,patient072,115200
+201,,Myocardial infarction,patient072/s0244lre,patient072,115200
+202,,Myocardial infarction,patient072/s0318lre,patient072,115200
+203,,Myocardial infarction,patient073/s0238lre,patient073,115200
+204,,Myocardial infarction,patient073/s0243lre,patient073,115200
+205,,Myocardial infarction,patient073/s0249lre,patient073,115200
+206,,Myocardial infarction,patient073/s0252lre,patient073,115200
+207,,Myocardial infarction,patient074/s0239lre,patient074,115200
+208,,Myocardial infarction,patient074/s0241lre,patient074,115200
+209,,Myocardial infarction,patient074/s0245lre,patient074,115200
+210,,Myocardial infarction,patient074/s0406lre,patient074,115200
+211,,Myocardial infarction,patient075/s0242lre,patient075,115200
+212,,Myocardial infarction,patient075/s0246lre,patient075,115200
+213,,Myocardial infarction,patient075/s0248lre,patient075,115200
+214,,Myocardial infarction,patient075/s0327lre,patient075,115200
+215,,Myocardial infarction,patient076/s0247lre,patient076,115200
+216,,Myocardial infarction,patient076/s0250lre,patient076,115200
+217,,Myocardial infarction,patient076/s0253lre,patient076,115200
+218,,Myocardial infarction,patient076/s0319lre,patient076,115200
+219,,Myocardial infarction,patient077/s0251lre,patient077,115200
+220,,Myocardial infarction,patient077/s0254lre,patient077,115200
+221,,Myocardial infarction,patient077/s0258lre,patient077,115200
+222,,Myocardial infarction,patient077/s0285lre,patient077,115200
+223,,Myocardial infarction,patient078/s0255lre,patient078,115200
+224,,Myocardial infarction,patient078/s0259lre,patient078,115200
+225,,Myocardial infarction,patient078/s0262lre,patient078,115200
+226,,Myocardial infarction,patient078/s0317lre,patient078,115200
+227,,Myocardial infarction,patient079/s0256lre,patient079,115200
+228,,Myocardial infarction,patient079/s0257lre,patient079,115200
+229,,Myocardial infarction,patient079/s0263lre,patient079,115200
+230,,Myocardial infarction,patient079/s0269lre,patient079,115200
+231,,Myocardial infarction,patient080/s0260lre,patient080,115200
+232,,Myocardial infarction,patient080/s0261lre,patient080,115200
+233,,Myocardial infarction,patient080/s0265lre,patient080,115200
+234,,Myocardial infarction,patient080/s0315lre,patient080,115200
+235,,Myocardial infarction,patient081/s0264lre,patient081,115200
+236,,Myocardial infarction,patient081/s0266lre,patient081,115200
+237,,Myocardial infarction,patient081/s0270lre,patient081,115200
+238,,Myocardial infarction,patient081/s0346lre,patient081,115200
+239,,Myocardial infarction,patient082/s0267lre,patient082,115200
+240,,Myocardial infarction,patient082/s0271lre,patient082,115200
+241,,Myocardial infarction,patient082/s0279lre,patient082,115200
+242,,Myocardial infarction,patient082/s0320lre,patient082,115200
+243,,Myocardial infarction,patient083/s0268lre,patient083,115200
+244,,Myocardial infarction,patient083/s0272lre,patient083,115200
+245,,Myocardial infarction,patient083/s0286lre,patient083,115200
+246,,Myocardial infarction,patient083/s0290lre,patient083,115200
+247,,Myocardial infarction,patient084/s0281lre,patient084,115200
+248,,Myocardial infarction,patient084/s0288lre,patient084,115200
+249,,Myocardial infarction,patient084/s0289lre,patient084,115200
+250,,Myocardial infarction,patient084/s0313lre,patient084,115200
+251,,Myocardial infarction,patient085/s0296lre,patient085,115200
+252,,Myocardial infarction,patient085/s0297lre,patient085,115200
+253,,Myocardial infarction,patient085/s0298lre,patient085,115200
+254,,Myocardial infarction,patient085/s0345lre,patient085,115200
+255,,Myocardial infarction,patient086/s0316lre,patient086,115200
+256,,Myocardial infarction,patient087/s0321lre,patient087,115200
+257,,Myocardial infarction,patient087/s0326lre,patient087,115200
+258,,Myocardial infarction,patient087/s0330lre,patient087,115200
+259,,Myocardial infarction,patient088/s0339lre,patient088,115200
+260,,Myocardial infarction,patient088/s0343lre,patient088,115200
+261,,Myocardial infarction,patient088/s0352lre,patient088,115200
+262,,Myocardial infarction,patient088/s0413lre,patient088,115200
+263,,Myocardial infarction,patient089/s0344lre,patient089,115200
+264,,Myocardial infarction,patient089/s0355lre,patient089,115200
+265,,Myocardial infarction,patient089/s0359lre,patient089,115200
+266,,Myocardial infarction,patient089/s0372lre,patient089,115200
+267,,Myocardial infarction,patient090/s0348lre,patient090,115200
+268,,Myocardial infarction,patient090/s0356lre,patient090,115200
+269,,Myocardial infarction,patient090/s0360lre,patient090,115200
+270,,Myocardial infarction,patient090/s0418lre,patient090,115200
+271,,Myocardial infarction,patient091/s0353lre,patient091,115200
+272,,Myocardial infarction,patient091/s0357lre,patient091,115200
+273,,Myocardial infarction,patient091/s0361lre,patient091,115200
+274,,Myocardial infarction,patient091/s0408lre,patient091,115200
+275,,Myocardial infarction,patient092/s0354lre,patient092,115200
+276,,Myocardial infarction,patient092/s0358lre,patient092,115200
+277,,Myocardial infarction,patient092/s0362lre,patient092,115200
+278,,Myocardial infarction,patient092/s0411lre,patient092,115200
+279,,Myocardial infarction,patient093/s0367lre,patient093,115200
+280,,Myocardial infarction,patient093/s0371lre,patient093,115200
+281,,Myocardial infarction,patient093/s0375lre,patient093,115200
+282,,Myocardial infarction,patient093/s0378lre,patient093,115200
+283,,Myocardial infarction,patient093/s0396lre,patient093,115200
+284,,Myocardial infarction,patient094/s0368lre,patient094,115200
+285,,Myocardial infarction,patient094/s0370lre,patient094,115200
+286,,Myocardial infarction,patient094/s0376lre,patient094,115200
+287,,Myocardial infarction,patient094/s0412lre,patient094,115200
+288,,Myocardial infarction,patient095/s0369lre,patient095,115200
+289,,Myocardial infarction,patient095/s0373lre,patient095,115200
+290,,Myocardial infarction,patient095/s0377lre,patient095,115200
+291,,Myocardial infarction,patient095/s0417lre,patient095,115200
+292,,Myocardial infarction,patient096/s0379lre,patient096,115200
+293,,Myocardial infarction,patient096/s0381lre,patient096,115200
+294,,Myocardial infarction,patient096/s0385lre,patient096,115200
+295,,Myocardial infarction,patient096/s0395lre,patient096,115200
+296,,Myocardial infarction,patient097/s0380lre,patient097,115200
+297,,Myocardial infarction,patient097/s0382lre,patient097,115200
+298,,Myocardial infarction,patient097/s0384lre,patient097,115200
+299,,Myocardial infarction,patient097/s0394lre,patient097,115200
+300,,Myocardial infarction,patient098/s0386lre,patient098,115200
+301,,Myocardial infarction,patient098/s0389lre,patient098,115200
+302,,Myocardial infarction,patient098/s0398lre,patient098,115200
+303,,Myocardial infarction,patient098/s0409lre,patient098,115200
+304,,Myocardial infarction,patient099/s0387lre,patient099,115200
+305,,Myocardial infarction,patient099/s0388lre,patient099,115200
+306,,Myocardial infarction,patient099/s0397lre,patient099,115200
+307,,Myocardial infarction,patient099/s0419lre,patient099,115200
+308,,Myocardial infarction,patient100/s0399lre,patient100,115200
+309,,Myocardial infarction,patient100/s0401lre,patient100,115200
+310,,Myocardial infarction,patient100/s0407lre,patient100,115200
+311,,Myocardial infarction,patient101/s0400lre,patient101,115200
+312,,Myocardial infarction,patient101/s0410lre,patient101,115200
+313,,Myocardial infarction,patient101/s0414lre,patient101,115200
+314,,Myocardial infarction,patient102/s0416lre,patient102,115200
+315,,Myocardial infarction,patient103/s0332lre,patient103,115200
+316,,Healthy control,patient104/s0306lre,patient104,115200
+317,,Healthy control,patient105/s0303lre,patient105,115200
+318,,Valvular heart disease,patient106/s0030_re,patient106,32000
+319,,Valvular heart disease,patient107/s0199_re,patient107,38400
+320,,Myocardial infarction,patient108/s0013_re,patient108,38400
+321,,Dysrhythmia,patient109/s0349lre,patient109,115200
+322,,Valvular heart disease,patient110/s0003_re,patient110,38400
+323,,Myocardial infarction,patient111/s0203_re,patient111,38400
+324,,Dysrhythmia,patient112/s0169_re,patient112,38400
+325,,Dysrhythmia,patient113/s0018cre,patient113,38400
+326,,Dysrhythmia,patient113/s0018lre,patient113,76800
+327,,Valvular heart disease,patient114/s0012_re,patient114,38400
+328,,Heart failure (NYHA 2),patient115/s0023_re,patient115,38400
+329,,Healthy control,patient116/s0302lre,patient116,115200
+330,,Healthy control,patient117/s0291lre,patient117,115200
+331,,Healthy control,patient117/s0292lre,patient117,115200
+332,,Heart failure (NYHA 3),patient118/s0183_re,patient118,38400
+333,,n/a,patient119/s0001_re,patient119,38400
+334,,Myocardial infarction,patient120/s0331lre,patient120,115200
+335,,Healthy control,patient121/s0311lre,patient121,115200
+336,,Healthy control,patient122/s0312lre,patient122,115200
+337,,Heart failure (NYHA 4),patient123/s0224_re,patient123,38400
+338,,n/a,patient125/s0006_re,patient125,38400
+339,,Palpitation,patient126/s0154_re,patient126,38400
+340,,Cardiomyopathy,patient127/s0342lre,patient127,115200
+341,,Cardiomyopathy,patient127/s0383lre,patient127,115200
+342,,Myocardial infarction,patient128/s0182_re,patient128,38400
+343,,Cardiomyopathy,patient129/s0189_re,patient129,38400
+344,,Stable angina,patient130/s0166_re,patient130,38400
+345,,Healthy control,patient131/s0273lre,patient131,115200
+346,,Dysrhythmia,patient133/s0393lre,patient133,115200
+347,,Myocardial infarction,patient135/s0334lre,patient135,115200
+348,,n/a,patient136/s0205_re,patient136,38400
+349,,Cardiomyopathy,patient137/s0392lre,patient137,115200
+350,,Myocardial infarction,patient138/s0005_re,patient138,38400
+351,,Myocardial infarction,patient139/s0223_re,patient139,38400
+352,,Myocardial infarction,patient140/s0019_re,patient140,38400
+353,,Myocardial infarction,patient141/s0307lre,patient141,115200
+354,,Myocardial infarction,patient142/s0351lre,patient142,115200
+355,,n/a,patient143/s0333lre,patient143,115200
+356,,n/a,patient144/s0341lre,patient144,115200
+357,,Myocardial infarction,patient145/s0201_re,patient145,38400
+358,,n/a,patient146/s0007_re,patient146,38400
+359,,Dysrhythmia,patient147/s0211_re,patient147,38400
+360,,Myocardial infarction,patient148/s0335lre,patient148,115200
+361,,Myocardial infarction,patient149/s0202are,patient149,38400
+362,,Myocardial infarction,patient149/s0202bre,patient149,38400
+363,,Healthy control,patient150/s0287lre,patient150,115200
+364,,Dysrhythmia,patient151/s0206_re,patient151,38400
+365,,Myocardial infarction,patient152/s0004_re,patient152,38400
+366,,Dysrhythmia,patient153/s0391lre,patient153,115200
+367,,n/a,patient154/s0170_re,patient154,38400
+368,,Healthy control,patient155/s0301lre,patient155,115200
+369,,Healthy control,patient156/s0299lre,patient156,115200
+370,,Dysrhythmia,patient157/s0338lre,patient157,115200
+371,,Myocardial infarction,patient158/s0294lre,patient158,115200
+372,,Myocardial infarction,patient158/s0295lre,patient158,115200
+373,,Hypertrophy,patient159/s0390lre,patient159,115200
+374,,Myocardial infarction,patient160/s0222_re,patient160,38400
+375,,n/a,patient162/s0193_re,patient162,38400
+376,,Myocardial infarction,patient163/s0034_re,patient163,38400
+377,,n/a,patient164/s0024are,patient164,38400
+378,,n/a,patient164/s0024bre,patient164,38400
+379,,Healthy control,patient165/s0322lre,patient165,115200
+380,,Healthy control,patient165/s0323lre,patient165,115200
+381,,Healthy control,patient166/s0275lre,patient166,115200
+382,,Cardiomyopathy,patient167/s0200_re,patient167,38400
+383,,Dysrhythmia,patient168/s0032_re,patient168,38400
+384,,Dysrhythmia,patient168/s0033_re,patient168,38400
+385,,Healthy control,patient169/s0328lre,patient169,115200
+386,,Healthy control,patient169/s0329lre,patient169,115200
+387,,Healthy control,patient170/s0274lre,patient170,115200
+388,,Bundle branch block,patient171/s0364lre,patient171,115200
+389,,Healthy control,patient172/s0304lre,patient172,115200
+390,,Healthy control,patient173/s0305lre,patient173,115200
+391,,Healthy control,patient174/s0300lre,patient174,115200
+392,,Healthy control,patient174/s0324lre,patient174,115200
+393,,Healthy control,patient174/s0325lre,patient174,115200
+394,,Bundle branch block,patient175/s0009_re,patient175,38400
+395,,n/a,patient176/s0188_re,patient176,38400
+396,,Dysrhythmia,patient177/s0366lre,patient177,115200
+397,,n/a,patient178/s0011_re,patient178,38400
+398,,n/a,patient179/s0176_re,patient179,38400
+399,,Healthy control,patient180/s0374lre,patient180,115200
+400,,Healthy control,patient180/s0475_re,patient180,120012
+401,,Healthy control,patient180/s0476_re,patient180,120012
+402,,Healthy control,patient180/s0477_re,patient180,120012
+403,,Healthy control,patient180/s0490_re,patient180,120012
+404,,Healthy control,patient180/s0545_re,patient180,120012
+405,,Healthy control,patient180/s0561_re,patient180,120012
+406,,n/a,patient181/s0204are,patient181,38400
+407,,n/a,patient181/s0204bre,patient181,38400
+408,,Healthy control,patient182/s0308lre,patient182,115200
+409,,Myocardial infarction,patient183/s0175_re,patient183,38400
+410,,Healthy control,patient184/s0363lre,patient184,115200
+411,,Healthy control,patient185/s0336lre,patient185,115200
+412,,n/a,patient186/s0293lre,patient186,115200
+413,,Dysrhythmia,patient187/s0207_re,patient187,38400
+414,,Valvular heart disease,patient188/s0365lre,patient188,115200
+415,,Myocardial infarction,patient189/s0309lre,patient189,115200
+416,,n/a,patient190/s0040_re,patient190,38400
+417,,n/a,patient190/s0041_re,patient190,38400
+418,,Stable angina,patient191/s0340lre,patient191,115200
+419,,n/a,patient192/s0048_re,patient192,38400
+420,,Myocardial infarction,patient193/s0008_re,patient193,38400
+421,,n/a,patient194/s0310lre,patient194,115200
+422,,Myocardial infarction,patient195/s0337lre,patient195,115200
+423,,Unstable angina,patient196/s0002_re,patient196,38400
+424,,Myocardial infarction,patient197/s0350lre,patient197,115200
+425,,Myocardial infarction,patient197/s0403lre,patient197,115200
+426,,Healthy control,patient198/s0402lre,patient198,115200
+427,,Healthy control,patient198/s0415lre,patient198,115200
+428,,Bundle branch block,patient199/s0404lre,patient199,115200
+429,,n/a,patient200/s0405lre,patient200,115200
+430,,Cardiomyopathy,patient201/s0420_re,patient201,120012
+431,,Cardiomyopathy,patient201/s0423_re,patient201,120012
+432,,Bundle branch block,patient202/s0421_re,patient202,120012
+433,,Bundle branch block,patient202/s0422_re,patient202,120012
+434,,Bundle branch block,patient203/s0424_re,patient203,120012
+435,,Bundle branch block,patient204/s0425_re,patient204,120012
+436,,Myocardial infarction,patient205/s0426_re,patient205,120012
+437,,Bundle branch block,patient206/s0427_re,patient206,120012
+438,,Myocardial infarction,patient207/s0428_re,patient207,120012
+439,,Bundle branch block,patient208/s0429_re,patient208,91987
+440,,Bundle branch block,patient208/s0430_re,patient208,120012
+441,,Bundle branch block,patient209/s0431_re,patient209,120012
+442,,Hypertrophy,patient210/s0432_re,patient210,120012
+443,,Myocardial infarction,patient211/s0433_re,patient211,120012
+444,,Hypertrophy,patient212/s0434_re,patient212,120012
+445,,Bundle branch block,patient213/s0435_re,patient213,120012
+446,,Healthy control,patient214/s0436_re,patient214,120012
+447,,Cardiomyopathy,patient215/s0437_re,patient215,120012
+448,,Hypertrophy,patient216/s0438_re,patient216,120012
+449,,Bundle branch block,patient217/s0439_re,patient217,120012
+450,,Dysrhythmia,patient218/s0440_re,patient218,120012
+451,,Bundle branch block,patient219/s0441_re,patient219,120012
+452,,Bundle branch block,patient220/s0442_re,patient220,120012
+453,,Hypertrophy,patient221/s0443_re,patient221,120012
+454,,Cardiomyopathy,patient222/s0444_re,patient222,120012
+455,,Myocardial infarction,patient223/s0445_re,patient223,120012
+456,,Myocardial infarction,patient223/s0446_re,patient223,120012
+457,,Valvular heart disease,patient224/s0447_re,patient224,120012
+458,,Bundle branch block,patient225/s0448_re,patient225,120012
+459,,Myocardial infarction,patient226/s0449_re,patient226,120012
+460,,Hypertrophy,patient227/s0450_re,patient227,120012
+461,,Bundle branch block,patient228/s0451_re,patient228,120012
+462,,Healthy control,patient229/s0452_re,patient229,120012
+463,,Healthy control,patient229/s0453_re,patient229,120012
+464,,Myocardial infarction,patient230/s0454_re,patient230,120012
+465,,Myocardial infarction,patient231/s0455_re,patient231,120012
+466,,Cardiomyopathy,patient232/s0456_re,patient232,120012
+467,,Healthy control,patient233/s0457_re,patient233,120012
+468,,Healthy control,patient233/s0458_re,patient233,120012
+469,,Healthy control,patient233/s0459_re,patient233,120012
+470,,Healthy control,patient233/s0482_re,patient233,120012
+471,,Healthy control,patient233/s0483_re,patient233,120012
+472,,Healthy control,patient234/s0460_re,patient234,120012
+473,,Healthy control,patient235/s0461_re,patient235,120012
+474,,Healthy control,patient236/s0462_re,patient236,118184
+475,,Healthy control,patient236/s0463_re,patient236,120012
+476,,Healthy control,patient236/s0464_re,patient236,120012
+477,,Healthy control,patient237/s0465_re,patient237,120012
+478,,Healthy control,patient238/s0466_re,patient238,120012
+479,,Healthy control,patient239/s0467_re,patient239,120012
+480,,Healthy control,patient240/s0468_re,patient240,120012
+481,,Healthy control,patient241/s0469_re,patient241,97000
+482,,Healthy control,patient241/s0470_re,patient241,120012
+483,,Healthy control,patient242/s0471_re,patient242,120012
+484,,Healthy control,patient243/s0472_re,patient243,120012
+485,,Healthy control,patient244/s0473_re,patient244,120012
+486,,Healthy control,patient245/s0474_re,patient245,120012
+487,,Healthy control,patient245/s0480_re,patient245,120012
+488,,Healthy control,patient246/s0478_re,patient246,120012
+489,,Healthy control,patient247/s0479_re,patient247,120012
+490,,Healthy control,patient248/s0481_re,patient248,120012
+491,,Myocarditis,patient249/s0484_re,patient249,120012
+492,,Hypertrophy,patient250/s0485_re,patient250,120012
+493,,Healthy control,patient251/s0486_re,patient251,120012
+494,,Healthy control,patient251/s0503_re,patient251,120012
+495,,Healthy control,patient251/s0506_re,patient251,120012
+496,,Healthy control,patient252/s0487_re,patient252,120012
+497,,Cardiomyopathy,patient253/s0488_re,patient253,120012
+498,,Cardiomyopathy,patient254/s0489_re,patient254,120012
+499,,Healthy control,patient255/s0491_re,patient255,120012
+500,,Cardiomyopathy,patient256/s0492_re,patient256,120012
+501,,Cardiomyopathy,patient257/s0493_re,patient257,120012
+502,,Dysrhythmia,patient258/s0494_re,patient258,120012
+503,,Myocardial infarction,patient259/s0495_re,patient259,120012
+504,,Healthy control,patient260/s0496_re,patient260,120012
+505,,Myocardial infarction,patient261/s0497_re,patient261,120012
+506,,Cardiomyopathy,patient262/s0498_re,patient262,120012
+507,,Healthy control,patient263/s0499_re,patient263,120012
+508,,Healthy control,patient264/s0500_re,patient264,120012
+509,,Myocardial infarction,patient265/s0501_re,patient265,120012
+510,,Healthy control,patient266/s0502_re,patient266,120012
+511,,Healthy control,patient267/s0504_re,patient267,120012
+512,,Myocardial infarction,patient268/s0505_re,patient268,120012
+513,,Myocarditis,patient269/s0508_re,patient269,120012
+514,,Myocardial infarction,patient270/s0507_re,patient270,120012
+515,,Myocarditis,patient271/s0509_re,patient271,120012
+516,,Myocarditis,patient272/s0510_re,patient272,120012
+517,,Myocardial infarction,patient273/s0511_re,patient273,120012
+518,,Myocardial infarction,patient274/s0512_re,patient274,120012
+519,,n/a,patient275/s0513_re,patient275,120012
+520,,Healthy control,patient276/s0526_re,patient276,120012
+521,,Healthy control,patient277/s0527_re,patient277,120012
+522,,n/a,patient278/s0528_re,patient278,120012
+523,,n/a,patient278/s0529_re,patient278,120012
+524,,n/a,patient278/s0530_re,patient278,120012
+525,,Healthy control,patient279/s0531_re,patient279,120012
+526,,Healthy control,patient279/s0532_re,patient279,120012
+527,,Healthy control,patient279/s0533_re,patient279,120012
+528,,Healthy control,patient279/s0534_re,patient279,120012
+529,,Myocardial infarction,patient280/s0535_re,patient280,120012
+530,,n/a,patient281/s0537_re,patient281,120012
+531,,Myocardial infarction,patient282/s0539_re,patient282,120012
+532,,Myocardial infarction,patient283/s0542_re,patient283,120012
+533,,Healthy control,patient284/s0543_re,patient284,120012
+534,,Healthy control,patient284/s0551_re,patient284,120012
+535,,Healthy control,patient284/s0552_re,patient284,120012
+536,,n/a,patient285/s0544_re,patient285,120012
+537,,Dysrhythmia,patient286/s0546_re,patient286,120012
+538,,Myocardial infarction,patient287/s0547_re,patient287,120012
+539,,Myocardial infarction,patient287/s0548_re,patient287,120012
+540,,Cardiomyopathy,patient288/s0549_re,patient288,120012
+541,,Cardiomyopathy,patient289/s0550_re,patient289,120012
+542,,Myocardial infarction,patient290/s0553_re,patient290,120012
+543,,Myocardial infarction,patient291/s0554_re,patient291,120012
+544,,Myocardial infarction,patient292/s0555_re,patient292,120012
+545,,Myocardial infarction,patient292/s0556_re,patient292,120012
+546,,Myocardial infarction,patient293/s0557_re,patient293,120012
+547,,Myocardial infarction,patient293/s0558_re,patient293,120012
+548,,Myocardial infarction,patient294/s0559_re,patient294,120012

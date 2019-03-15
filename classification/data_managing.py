@@ -5,12 +5,10 @@ from wfdb import io
 import math
 from sklearn.utils import shuffle
 
-
 data_folder = '../data/ptdb/'
 
 
-
-def get_record(record_names):
+def get_record(record_names, prefix = ''):
     records = []
     for record_name in tqdm(record_names):
         record = io.rdrecord(record_name=os.path.join(data_folder, record_name))
@@ -25,7 +23,7 @@ def get_train_test_set(selected_labels, record_names):
     test_patients = []
     train_patients = []
 
-    test_size = 0.2
+    test_size = 0.1
 
     df_records = get_record(record_names)
     # Randomly divide the subjects in train and test set.
@@ -39,11 +37,13 @@ def get_train_test_set(selected_labels, record_names):
     return train_patients, test_patients, df_records
 
 
-def make_set(df_data, label_map, record_id, window_size=2048, n_channels=15):
+def make_set(df_data, label_map, record_id, indices_channels, window_size=2048, taux_echant=1):
     n_windows = 0
+    n_channels = len(indices_channels)
+    overlapping = 2
 
     for _, record in df_data.iterrows():
-        n_windows += record['signal_length'] // window_size
+        n_windows += (record['signal_length'] *overlapping // window_size) // taux_echant
 
     dataX = np.zeros((n_windows, n_channels, window_size))
     dataY = np.zeros((n_windows, len(label_map)))
@@ -51,22 +51,47 @@ def make_set(df_data, label_map, record_id, window_size=2048, n_channels=15):
     record_list = []
 
     nth_window = 0
-    for i, (patient, record) in enumerate(df_data.iterrows()):
-        # read the record, get the signal data and transpose it
+    for i, (patient, record) in tqdm(enumerate(df_data[:5].iterrows())):
         signal_data = io.rdrecord(os.path.join(data_folder, record['name'])).p_signal.transpose()
-        n_rows = signal_data.shape[-1]
-        n_windows = n_rows // window_size
-        dataX[nth_window:nth_window + n_windows] = np.array(
-            [signal_data[:, i * window_size:(i + 1) * window_size] for i in range(n_windows)])
+        signal_data = signal_data[indices_channels]
+        signal_data_resampled = np.transpose(
+            np.array(
+                [np.mean(signal_data[:, i * taux_echant:(i + 1) * taux_echant], axis=1) for i in
+                 range(len(signal_data[0]) // taux_echant)]))
+
+        n_rows = signal_data_resampled.shape[-1]
+        n_windows = n_rows * overlapping // window_size -1
+
+        data_for_patient = np.array(
+            [signal_data_resampled[:,
+             i * int(window_size / overlapping):i * int(window_size / overlapping) + window_size] for i in
+             range(n_windows)])
+
+        dataX[nth_window:nth_window + n_windows] = data_for_patient
         dataY[nth_window:nth_window + n_windows][:, label_map[record.label]] = 1
+        last_id = nth_window + n_windows
+
         nth_window += n_windows
 
         if record_id:
             record_list += n_windows * [record['name']]
 
+    dataX = dataX[:nth_window]
+    dataY = dataY[:nth_window]
+    print('nth_window',nth_window)
+    print('last id',last_id)
+    print('len dataX',len(dataX))
+    print('len dataY',len(dataY))
+    print('len record list', len(record_list))
+
     return dataX, dataY, record_list
 
+
 def get_rnn_train_test_set(selected_labels, window_size):
+    ptdb_features = ['i', 'ii', 'iii', 'avr', 'avl', 'avf', 'v1', 'v2', 'v3', 'v4', 'v5', 'v6', 'vx', 'vy', 'vz']
+    chosen_features = ['avr']
+    chosen_indices = [ptdb_features.index(elt) for elt in chosen_features]
+
     record_names = io.get_record_list('ptbdb')
 
     label_map = {label: value for label, value in zip(selected_labels, range(len(selected_labels)))}
@@ -77,8 +102,10 @@ def get_rnn_train_test_set(selected_labels, window_size):
     # Select the meta data of the patient we need.
     df_train_patients = df_patient_records.loc[train_patients]
     df_test_patients = df_patient_records.loc[test_patients]
-    trainX, trainY, _ = make_set(df_train_patients, label_map, False, window_size, 15)
-    testX, testY, record_list = make_set(df_test_patients, label_map, True, window_size, 15)
+    trainX, trainY, _ = make_set(df_train_patients, label_map, False, window_size=window_size,
+                                 indices_channels=chosen_indices)
+    testX, testY, record_list = make_set(df_test_patients, label_map, True, window_size=window_size,
+                                         indices_channels=chosen_indices)
 
     trainX, trainY = shuffle(trainX, trainY)
     return trainX, trainY, testX, testY, record_list
