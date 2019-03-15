@@ -1,0 +1,119 @@
+body, html {
+    background: #0f0c29;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    font-family: 'Noto Sans JP', sans-serif;
+}
+
+h1, h2, h3, p {
+    color: white
+}
+
+h1 {
+    text-align: center;
+}
+
+#controls {
+    display: none;
+    flex-flow: row nowrap;
+    width : 80%;
+    margin: auto;
+    margin-top : 20px;
+    justify-content: center;
+}
+
+button {
+    background-color: #667db6;
+    font-size : 1rem;
+    padding: 15px;
+    margin : 15px;
+    border: 0px solid transparent;
+    border-radius: 50px;
+    cursor : pointer;
+    color : white;
+}
+
+.danger {
+    background-color: #f44336;
+    color : black;
+}
+
+.success {
+    background-color: #4CAF50;
+    color : white;
+}
+
+.gray {
+    background-color: #e7e7e7; 
+    color: black;
+}
+
+.warning {
+    background-color: #e2e600; 
+    color: black;
+}
+
+header {
+    position: relative;
+}
+
+#connect-status {
+    position: absolute;
+    top: 0;
+    right: 20px;
+    background-color: #f44336;
+    color: white;
+    border-radius: 50px;
+    padding: 10px;
+}
+
+.dashboard {
+    width: 100%;
+    margin-top: 50px;
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.dashboard .watcher {
+    width: calc(100% / 2 - 10px);
+    height: auto;
+    margin : 5px;
+    margin-top: 20px;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.dashboard #add-controls {
+    margin-top: 20px;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: space-around;
+    align-items: center;
+    width : 50%;
+}
+.dashboard .add-button {
+    height: 100px;
+    width: 100px;
+    margin: auto;
+    padding: 0;
+    font-size: 7em;
+    border-radius: 50px;
+    text-align: center;
+    line-height: 90px;
+}
+
+form input[type="text"] {
+    height : 30px;
+    line-height : 30px;
+    font-size : 16px;
+    text-align : center;
+    margin : auto;
+    border-radius : 50px;
+    border : 0px solid transparent;
+}
+
+input:focus, button:focus {
+    outline: none;
+}

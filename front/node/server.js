@@ -1,8 +1,8 @@
 const express = require('express');
 const opn = require('opn');
+
 const envt = process.env.NODE_ENV || 'development';
 const config = require('./config.json')[envt];
-
 
 let app = express();
 

@@ -5,15 +5,17 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start-dev": "nodemon server.js",
-    "start": "node server.js"
+    "dev": "nodemon index.js",
+    "start": "node index.js"
   },
   "author": "Maxence Lecanu",
   "license": "ISC",
   "dependencies": {
     "axios": "^0.18.0",
+    "chalk": "^2.4.2",
     "express": "^4.16.4",
     "mongoose": "^5.4.17",
+    "mqtt": "^2.18.8",
     "node-cron": "^2.0.3"
   }
 }
