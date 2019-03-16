@@ -1,0 +1,14 @@
+{
+    "development": {
+        "config_id": "development",
+        "app_name": "asclepios2",
+        "flask_port": 5000,
+        "broker_uri": "localhost"
+    },
+    "production": {
+        "config_id": "production",
+        "app_name": "asclepios2",
+        "flask_port": 5000,
+        "broker_uri": "mqtt://localhost:1883"
+    }
+}
