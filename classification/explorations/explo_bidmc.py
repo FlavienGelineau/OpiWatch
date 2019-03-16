@@ -9,13 +9,13 @@ average : moyenne glissante.
 II : inconnu au bataillon
 
 '''
-def get_patient_bidmc_csv_n(n):
+def get_patient_bidmc_csv_n(n, prefix = '../../../'):
     id = str(n) if n>=10 else '0'+str(n)
-    breath = pd.read_csv('../data/bidmc_csv/bidmc_{}_Breaths.csv'.format(id))
-    numerics = pd.read_csv('../data/bidmc_csv/bidmc_{}_Numerics.csv'.format(id))
-    signals = pd.read_csv('../data/bidmc_csv/bidmc_{}_Signals.csv'.format(id))
+    breath = pd.read_csv(prefix + 'data/bidmc_csv/bidmc_{}_Breaths.csv'.format(id))
+    numerics = pd.read_csv(prefix + 'data/bidmc_csv/bidmc_{}_Numerics.csv'.format(id))
+    signals = pd.read_csv(prefix + 'data/bidmc_csv/bidmc_{}_Signals.csv'.format(id))
 
-    age = pd.read_csv('../data/bidmc_csv/bidmc_{}_Fix.txt'.format(id),
+    age = pd.read_csv(prefix+'data/bidmc_csv/bidmc_{}_Fix.txt'.format(id),
                       error_bad_lines=False,
                       warn_bad_lines=False,
                       sep = ':').to_dict()

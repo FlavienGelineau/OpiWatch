@@ -19,7 +19,7 @@ record = io.rdrecord(record_name="../data/ptdb/"+record_name)
 records = []
 for record_name in tqdm(record_names):
     record = io.rdrecord(record_name=os.path.join('../data/ptdb/', record_name))
-    print(record.si)
+    print(record.sig_name)
     # label = comments_to_dict(record.comments)['Reason for admission'][1:]
     label = record.comments[4].split(": ")[-1]
     patient = record_name.split('/')[0]
@@ -28,5 +28,4 @@ for record_name in tqdm(record_names):
 
 channels = record.sig_name
 df_records = pd.DataFrame(records)
-print(df_records[''])
 print(df_records)
