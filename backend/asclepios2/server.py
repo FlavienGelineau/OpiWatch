@@ -1,15 +1,26 @@
-import paho.mqtt.client as mqtt
+from lib.mqtt import Client
+import random
 import json
+import time
 
-from lib.mqtt import on_connect, on_message
-
-client = mqtt.Client()
-client.on_connect = on_connect
-client.on_message = on_message
-
+mqttc = Client()
 with open('config.json', 'r') as config_file:
     config = json.loads(config_file.read())["development"]
     print(" * Config:", config)
+mqttc.connect(config['broker_uri'], port=1883, keepalive=60)
+mqttc.loop_start()
 
-client.connect(config['broker_uri'], port=1883, keepalive=60, bind_address="")
-client.loop_forever()
+def make_preds(d):
+    r = {}
+    for p in d.keys():
+        if len(d[p]) == 1024:
+            r[p] = d[p][0]["time"]
+        else:
+            r[p] = 0
+    return r
+
+while True:
+    preds = make_preds(mqttc.storage.data)
+    print(f'Preds : {preds}')
+    time.sleep(4)
+    
