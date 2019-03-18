@@ -8,12 +8,15 @@ const config = require('./config.json')[envt];
 
 const mockFilename = 'bidmc_05_Signals.csv';
 
+broker_uri = process.argv[2]
+console.log(broker_uri)
+
 var id = random.string(10);
-var client  = mqtt.connect(config.broker_uri);
+var client  = mqtt.connect(broker_uri);
 
 // Client logs and event handlers
 client.on('connect', function () {
-  console.log(colors.connected(`Succesfully connected to ${colors.bold(config.broker_uri)}`));
+  console.log(colors.connected(`Succesfully connected to ${colors.bold(broker_uri)}`));
   console.log(colors.termination(`Data will be published on topic ${colors.bold(id)}`))
 })
 
