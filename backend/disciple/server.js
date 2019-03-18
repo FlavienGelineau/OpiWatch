@@ -6,10 +6,9 @@ const colors = require('./utils/colors');
 const envt = process.env.NODE_ENV || 'development';
 const config = require('./config.json')[envt];
 
-const mockFilename = process.argv[3] || 'bidmc_05_Signals.csv';
-const broker_uri = process.argv[2]
+const mockFilename = 'bidmc_05_Signals.csv';
 
-console.log(mockFilename)
+broker_uri = process.argv[2]
 console.log(broker_uri)
 
 var id = random.string(10);
@@ -27,10 +26,7 @@ const data = generator.format(mockFilename)
     index = 0;
     setInterval(() => {
       index = (index + 1) % data.length;
-      client.publish(id, JSON.stringify({
-        "time" : data[index]["time"],
-        "avg" : data[index]["AVR"]
-      }))
+      client.publish(id, JSON.stringify(data[index]))
     }, 8);
   })
   .catch( err => {

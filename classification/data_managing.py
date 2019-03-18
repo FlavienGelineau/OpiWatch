@@ -8,7 +8,7 @@ from sklearn.utils import shuffle
 data_folder = '../data/ptdb/'
 
 
-def get_record(record_names, prefix = ''):
+def get_record(record_names, prefix=''):
     records = []
     for record_name in tqdm(record_names):
         record = io.rdrecord(record_name=os.path.join(data_folder, record_name))
@@ -37,13 +37,30 @@ def get_train_test_set(selected_labels, record_names):
     return train_patients, test_patients, df_records
 
 
+def format_X(signal_data, taux_echant, overlapping, indices_channels, window_size):
+    signal_data = signal_data[indices_channels]
+    signal_data_resampled = np.transpose(
+        np.array(
+            [np.mean(signal_data[:, i * taux_echant:(i + 1) * taux_echant], axis=1) for i in
+             range(len(signal_data[0]) // taux_echant)]))
+
+    n_rows = signal_data_resampled.shape[-1]
+    n_windows = n_rows * overlapping // window_size - 1
+
+    data_for_patient = np.array(
+        [signal_data_resampled[:,
+         i * int(window_size / overlapping):i * int(window_size / overlapping) + window_size] for i in
+         range(n_windows)])
+    return data_for_patient, n_rows, n_windows
+
+
 def make_set(df_data, label_map, record_id, indices_channels, window_size=2048, taux_echant=1):
     n_windows = 0
     n_channels = len(indices_channels)
     overlapping = 2
 
     for _, record in df_data.iterrows():
-        n_windows += (record['signal_length'] *overlapping // window_size) // taux_echant
+        n_windows += (record['signal_length'] * overlapping // window_size) // taux_echant
 
     dataX = np.zeros((n_windows, n_channels, window_size))
     dataY = np.zeros((n_windows, len(label_map)))
@@ -51,21 +68,10 @@ def make_set(df_data, label_map, record_id, indices_channels, window_size=2048, 
     record_list = []
 
     nth_window = 0
-    for i, (patient, record) in tqdm(enumerate(df_data[:5].iterrows())):
+    for i, (patient, record) in tqdm(enumerate(df_data.iterrows())):
         signal_data = io.rdrecord(os.path.join(data_folder, record['name'])).p_signal.transpose()
-        signal_data = signal_data[indices_channels]
-        signal_data_resampled = np.transpose(
-            np.array(
-                [np.mean(signal_data[:, i * taux_echant:(i + 1) * taux_echant], axis=1) for i in
-                 range(len(signal_data[0]) // taux_echant)]))
-
-        n_rows = signal_data_resampled.shape[-1]
-        n_windows = n_rows * overlapping // window_size -1
-
-        data_for_patient = np.array(
-            [signal_data_resampled[:,
-             i * int(window_size / overlapping):i * int(window_size / overlapping) + window_size] for i in
-             range(n_windows)])
+        data_for_patient, n_rows, n_windows = format_X(signal_data, taux_echant, overlapping, indices_channels,
+                                                       window_size)
 
         dataX[nth_window:nth_window + n_windows] = data_for_patient
         dataY[nth_window:nth_window + n_windows][:, label_map[record.label]] = 1
@@ -78,10 +84,10 @@ def make_set(df_data, label_map, record_id, indices_channels, window_size=2048, 
 
     dataX = dataX[:nth_window]
     dataY = dataY[:nth_window]
-    print('nth_window',nth_window)
-    print('last id',last_id)
-    print('len dataX',len(dataX))
-    print('len dataY',len(dataY))
+    print('nth_window', nth_window)
+    print('last id', last_id)
+    print('len dataX', len(dataX))
+    print('len dataY', len(dataY))
     print('len record list', len(record_list))
 
     return dataX, dataY, record_list

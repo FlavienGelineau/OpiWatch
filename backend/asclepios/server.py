@@ -10,19 +10,13 @@ with open('config.json', 'r') as config_file:
 mqttc.connect(config['broker_uri'], port=1883, keepalive=60)
 mqttc.loop_start()
 
-"""
-charger le modèle ici
-"""
-
-
-"""
-Utiliser le modèle ici
-"""
 def make_preds(d):
     r = {}
     for p in d.keys():
         if len(d[p]) == 1024:
+            print(d[p][0])
             r[p] = d[p][0]["time"]
+
         else:
             r[p] = 0
     return r
