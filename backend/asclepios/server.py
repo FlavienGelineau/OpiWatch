@@ -14,24 +14,26 @@ with open('config.json', 'r') as config_file:
 mqttc.connect(config['broker_uri'], port=1883, keepalive=60)
 mqttc.loop_start()
 
-model = pkl.load(open('../../data/sklearn_model_fitted.pkl', 'rb'))
+model = pkl.load(open('../../../data/sklearn_model_fitted.pkl', 'rb'))
 diseases = ['Myocardial infarction', 'Bundle branch block', 'Cardiomyopathy', 'twa']
 
 last_preds = {
-disease:[] for disease in diseases
+    disease: [] for disease in diseases
 }
 
-def get_score_health(pred):
-    return pred['Healthy control']*100
 
-def get_disease(pred, threshold = 0.5):
+def get_score_health(pred):
+    return pred['Healthy control'] * 100
+
+
+def get_disease(pred, threshold=0.5):
     for disease in diseases:
-        if pred[disease]>threshold:
+        if pred[disease] > threshold:
             return disease
     return 'No disease clearly detected'
 
-def notice_trends(last_preds, preds, n_last_elts_chosen = 10):
 
+def notice_trends(last_preds, preds, n_last_elts_chosen=10):
     for disease in diseases:
         last_preds[disease].append(preds[disease])
     tendencies = []
@@ -53,15 +55,12 @@ def make_preds(d):
             r[p] = 0
             X = None
 
-    pred = model.predict(X) #['Healthy control', 'Myocardial infarction', 'Bundle branch block', 'Cardiomyopathy']
+    return model.predict(X)  # ['Healthy control', 'Myocardial infarction', 'Bundle branch block', 'Cardiomyopathy']
 
-    print('score healthyness :',  get_score_health(pred))
-    print('disease detected',  get_disease(pred))
-    print('trends over probabilities',  notice_trends(last_preds, pred))
-    return X
 
 while True:
-    preds = make_preds(mqttc.storage.data)
-    print(f'Preds : {preds}')
+    pred = make_preds(mqttc.storage.data)
+    print('score healthyness :', get_score_health(pred))
+    print('disease detected', get_disease(pred))
+    print('trends over probabilities', notice_trends(last_preds, pred))
     time.sleep(4)
-    

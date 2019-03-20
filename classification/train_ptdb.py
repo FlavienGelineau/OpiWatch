@@ -29,16 +29,15 @@ def make_model():
     return model
 
 
-class NDStandardScaler(TransformerMixin):
-    def __init__(self, **kwargs):
-        self._scaler = StandardScaler(copy=True, **kwargs)
-        self._orig_shape = None
+selected_labels = ['Healthy control', 'Myocardial infarction', 'Bundle branch block', 'Cardiomyopathy']
+window_size = 1024
+trainX, trainY, testX, testY, record_list = get_rnn_train_test_set(selected_labels, window_size)
 
-    def fit(self, X, y, **kwargs):
-        X = np.array(X)
-        # Save the original shape to reshape the flattened X later
-        # back to its original shape
-        if len(X.shape) > 1:
+model = make_model((trainX.shape[1], trainX.shape[2]),
+                   trainY.shape[-1])
+
+checkpoint = ModelCheckpoint('weights_best_model', monitor='val_loss', verbose=1, save_best_only=True, mode='min')
+early_stopping = EarlyStopping(patience=5)
             self._orig_shape = X.shape[1:]
         X = self._flatten(X)
         self._scaler.fit(X, **kwargs)
@@ -104,4 +103,3 @@ summed = summed.groupby('record').mean()
 summed["predicted label"] = summed['predictions'] > 0.5
 
 print(confusion_matrix(testY.argmax(axis=1), output.argmax(axis=1)))
-print(classification_report(summed['label'], summed["predicted label"]))

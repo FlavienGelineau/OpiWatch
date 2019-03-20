@@ -114,24 +114,17 @@ def make_set(df_data, label_map, record_id, indices_channels, window_size=2048, 
     print('nth_window', nth_window)
     print('last id', last_id)
     print('len dataX', len(dataX))
-    print('len dataY', len(dataY))
-    print('len record list', len(record_list))
-
-    return dataX, dataY, record_list
-
 
 def get_rnn_train_test_set(selected_labels, window_size):
     ptdb_features = ['i', 'ii', 'iii', 'avr', 'avl', 'avf', 'v1', 'v2', 'v3', 'v4', 'v5', 'v6', 'vx', 'vy', 'vz']
     chosen_features = ['avr']
     chosen_indices = [ptdb_features.index(elt) for elt in chosen_features]
-
     record_names = pd.read_csv('../../data/ptdb/RECORDS').values.reshape(-1)
     print(record_names)
 
     label_map = {label: value for label, value in zip(selected_labels, range(len(selected_labels)))}
 
     train_patients, test_patients, df_records = get_train_test_set(selected_labels, record_names)
-    # Set patient as the index of the dataframe to easily extract the meta data by patient
     df_patient_records = df_records.set_index('patient')
     # Select the meta data of the patient we need.
     df_train_patients = df_patient_records.loc[train_patients]
