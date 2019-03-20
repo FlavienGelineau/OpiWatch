@@ -19,7 +19,7 @@ import pickle as pkl
 
 def make_model():
     input_shape = (1, 1024)
-    output_dim = 4
+    output_dim = 4+1
     model = Sequential()
     model.add(CuDNNLSTM(64, input_shape=input_shape, batch_size=None, return_sequences=False))
     model.add(Dense(200, activation='relu'))
@@ -65,15 +65,15 @@ class NDStandardScaler(TransformerMixin):
         return X
 
 
-selected_labels = ['Healthy control', 'Myocardial infarction', 'Bundle branch block', 'Cardiomyopathy']
+selected_labels = ['Healthy control', 'Myocardial infarction', 'Bundle branch block', 'Cardiomyopathy', 'twa']
 window_size = 1024
 
-load_precedents = True
+load_precedents = False
 if load_precedents:
-    trainX, trainY, testX, testY, record_list = pkl.load(open('cached_data.pkl', 'rb'))
+    trainX, trainY, testX, testY, record_list = pkl.load(open('../data/cached_data.pkl', 'rb'))
 else:
     trainX, trainY, testX, testY, record_list = get_rnn_train_test_set(selected_labels, window_size)
-    pkl.dump((trainX, trainY, testX, testY, record_list), open('cached_data.pkl', 'wb'))
+    pkl.dump((trainX, trainY, testX, testY, record_list), open('../.data/cached_data.pkl', 'wb'))
 
 checkpoint = ModelCheckpoint('weights_best_model', monitor='val_loss', verbose=1, save_best_only=True, mode='min')
 early_stopping = EarlyStopping(patience=5)
@@ -91,7 +91,7 @@ model = make_pipeline(scaler, model)
 model.fit(trainX, trainY)
 import pickle as pkl
 
-pkl.dump(model, open('sklearn_model_fitted.pkl', 'wb'))
+pkl.dump(model, open('../data/sklearn_model_fitted.pkl', 'wb'))
 print(testX.shape)
 output = model.predict_proba(testX)
 print(len(record_list), len(output), len(testY.argmax(axis=1)))

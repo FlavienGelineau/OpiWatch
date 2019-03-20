@@ -8,7 +8,7 @@ const config = require('./config.json')[envt];
 
 const mockFilename = 'bidmc_05_Signals.csv';
 
-broker_uri = process.argv[2]
+broker_uri = process.argv[2]s
 console.log(broker_uri)
 
 var id = random.string(10);
@@ -26,7 +26,10 @@ const data = generator.format(mockFilename)
     index = 0;
     setInterval(() => {
       index = (index + 1) % data.length;
-      client.publish(id, JSON.stringify(data[index]))
+      client.publish(id, JSON.stringify({
+        "time" : data[index]["time"],
+        "AVG" : data[index]["AVG"]
+      }))
     }, 8);
   })
   .catch( err => {

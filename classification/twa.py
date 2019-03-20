@@ -1,3 +1,5 @@
+from keras import Sequential
+from keras.layers import CuDNNLSTM, Dense
 from wfdb import io
 import pandas as pd
 import os
@@ -28,6 +30,30 @@ def get_record(record_names, prefix=''):
 
     return np.array(records)
 
+def get_twadb_db():
+    records = get_record(record_names, prefix='')
+    labels = [i for i in range(100)]
+    len_windows = 1024
 
-records = get_record(record_names, prefix='')
-print(records.shape)
+    y_map = pd.read_csv('raw_label_twadb', sep=' ').to_dict()
+    y_map = {value: key for key, value in y_map['labels'].items()}
+
+
+    def return_y(res):
+        if res>70:
+            return [0,0,0,0,1]
+
+
+    X = []
+    Y = []
+    for record_name, record, label in zip(record_names, records, labels):
+        if y_map[record_name]>80:
+            for i in range(len(record) // len_windows):
+                X.append(record[i:i + len_windows])
+                Y.append(return_y(y_map[record_name]))
+    X = np.array(X).reshape(-1, 1, 1024)
+    Y = np.array(Y)
+
+
+    return X, Y
+
