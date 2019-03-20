@@ -83,7 +83,7 @@
               x : newData[xLabel],
               y : newData[key]
             });
-            if(data[topic][key].length > 100){
+            if(data[topic][key].length > refreshDelay * 8){
               data[topic][key].shift();
             }
           }
@@ -107,7 +107,7 @@
         if(d.hasOwnProperty(key)){
           result.push({
             name : key,
-            color: 'steelblue',
+            color: 'white',
             data: d[key]
           })
         }
@@ -120,10 +120,10 @@
       return new Rickshaw.Graph({
         element: element,
         width: options.width ? options.width : 900,
-        height: options.height ? options.height : 200,
+        height: options.height ? options.height : 400,
         renderer: 'line',
-        min : 0,
-        max : 1,
+        min : -0.2,
+        max : 0.9,
         series: getRickshawFormat({})
       });
     }
@@ -136,7 +136,7 @@
       let watcher = event.target.parentNode
       watcher.innerHTML = `
       <h3>${topic}</h3>
-      <div class="chart">
+      <div class="chart" id="${topic}">
       
       </div>
       <div class="controls">
@@ -148,18 +148,31 @@
       `
       let options = {width : watcher.clientWidth, height : graphHeight}
       graphs[topic] = initialize(watcher.getElementsByClassName("chart")[0], options)
-
+      var hoverDetail = new Rickshaw.Graph.HoverDetail( {
+        graph: graphs[topic],
+        xFormatter: function(x) { return x + " ms" },
+      });
+      var time = new Rickshaw.Fixtures.Time();
+      var ms = time.unit('milisecond');
+      var xAxis = new Rickshaw.Graph.Axis.Time({
+          graph: graphs[topic],
+          timeUnit: ms
+      });
+      xAxis.render();
+      var yAxis = new Rickshaw.Graph.Axis.Y({
+        graph: graphs[topic],
+        tickFormat: Rickshaw.Fixtures.Number.formatKMBT,
+      });
+      yAxis.render();
       client.subscribe(topic, function() {
         console.log("listening to topic", topic) 
       });
-
       updateProcesses[topic] = setInterval(() => {
         let p = graphs[topic].series.active;
         graphs[topic].series = getRickshawFormat(data[topic]);
         graphs[topic].series.active = p;
         graphs[topic].update();
       }, refreshDelay)
-
       return false
     }
 
