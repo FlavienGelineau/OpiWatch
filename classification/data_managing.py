@@ -82,7 +82,7 @@ def make_set(df_data, label_map, record_id, indices_channels, window_size=2048, 
     record_list = []
 
     nth_window = 0
-    for i, (patient, record) in tqdm(enumerate(df_data.iterrows())):
+    for i, (patient, record) in tqdm(enumerate(df_data[:5].iterrows())):
         signal_data = io.rdrecord(os.path.join(data_folder, record['name'])).p_signal.transpose()
         data_for_patient, n_rows, n_windows = format_X(
             signal_data, taux_echant, overlapping, indices_channels, window_size)
@@ -106,14 +106,14 @@ def make_set(df_data, label_map, record_id, indices_channels, window_size=2048, 
         print(Y_twa.shape)
         print(dataX.shape)
         print(dataY.shape)
-        data_X = np.array(dataX.tolist()+ X_twa.tolist())
-        data_Y = np.array(dataY.tolist()+ Y_twa.tolist())
-        print(data_X.shape)
-        print(data_Y.shape)
+        dataX = np.array(dataX.tolist() + X_twa.tolist())
+        dataY = np.array(dataY.tolist() + Y_twa.tolist())
 
     print('nth_window', nth_window)
     print('last id', last_id)
     print('len dataX', len(dataX))
+    return dataX, dataY, record_list
+
 
 def get_rnn_train_test_set(selected_labels, window_size):
     ptdb_features = ['i', 'ii', 'iii', 'avr', 'avl', 'avf', 'v1', 'v2', 'v3', 'v4', 'v5', 'v6', 'vx', 'vy', 'vz']

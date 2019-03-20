@@ -5,7 +5,6 @@ from keras.models import Sequential
 from keras.wrappers.scikit_learn import KerasClassifier
 from sklearn.metrics import confusion_matrix, classification_report
 from keras.callbacks import EarlyStopping, ModelCheckpoint
-from sklearn.preprocessing import StandardScaler, MinMaxScaler
 
 from classification.data_managing import get_rnn_train_test_set
 
@@ -19,7 +18,7 @@ import pickle as pkl
 
 def make_model():
     input_shape = (1, 1024)
-    output_dim = 4+1
+    output_dim = 4 + 1
     model = Sequential()
     model.add(CuDNNLSTM(64, input_shape=input_shape, batch_size=None, return_sequences=False))
     model.add(Dense(200, activation='relu'))
@@ -29,15 +28,16 @@ def make_model():
     return model
 
 
-selected_labels = ['Healthy control', 'Myocardial infarction', 'Bundle branch block', 'Cardiomyopathy']
-window_size = 1024
-trainX, trainY, testX, testY, record_list = get_rnn_train_test_set(selected_labels, window_size)
+class NDStandardScaler(TransformerMixin):
+    def __init__(self, **kwargs):
+        self._scaler = StandardScaler(copy=True, **kwargs)
+        self._orig_shape = None
 
-model = make_model((trainX.shape[1], trainX.shape[2]),
-                   trainY.shape[-1])
-
-checkpoint = ModelCheckpoint('weights_best_model', monitor='val_loss', verbose=1, save_best_only=True, mode='min')
-early_stopping = EarlyStopping(patience=5)
+    def fit(self, X, y, **kwargs):
+        X = np.array(X)
+        # Save the original shape to reshape the flattened X later
+        # back to its original shape
+        if len(X.shape) > 1:
             self._orig_shape = X.shape[1:]
         X = self._flatten(X)
         self._scaler.fit(X, **kwargs)
@@ -69,12 +69,13 @@ window_size = 1024
 
 load_precedents = False
 if load_precedents:
-    trainX, trainY, testX, testY, record_list = pkl.load(open('../data/cached_data.pkl', 'rb'))
+    trainX, trainY, testX, testY, record_list = pkl.load(open('../../data/cached_data.pkl', 'rb'))
 else:
     trainX, trainY, testX, testY, record_list = get_rnn_train_test_set(selected_labels, window_size)
-    pkl.dump((trainX, trainY, testX, testY, record_list), open('../.data/cached_data.pkl', 'wb'))
+    pkl.dump((trainX, trainY, testX, testY, record_list), open('../../data/cached_data.pkl', 'wb'))
 
-checkpoint = ModelCheckpoint('../data/weights_best_model', monitor='val_loss', verbose=1, save_best_only=True, mode='min')
+checkpoint = ModelCheckpoint('../../data/weights_best_model', monitor='val_loss', verbose=1, save_best_only=True,
+                             mode='min')
 early_stopping = EarlyStopping(patience=5)
 callbacks_list = [checkpoint, early_stopping]
 
@@ -90,7 +91,9 @@ model = make_pipeline(scaler, model)
 model.fit(trainX, trainY)
 import pickle as pkl
 
-pkl.dump(model, open('../data/sklearn_model_fitted.pkl', 'wb'))
+pkl.dump(model, open('../../data/sklearn_model_fitted.pkl', 'wb'))
+model = pkl.load(open('../../data/sklearn_model_fitted.pkl', 'rb'))
+
 print(testX.shape)
 output = model.predict_proba(testX)
 print(len(record_list), len(output), len(testY.argmax(axis=1)))
