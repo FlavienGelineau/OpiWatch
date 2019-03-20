@@ -75,7 +75,7 @@ else:
     trainX, trainY, testX, testY, record_list = get_rnn_train_test_set(selected_labels, window_size)
     pkl.dump((trainX, trainY, testX, testY, record_list), open('../.data/cached_data.pkl', 'wb'))
 
-checkpoint = ModelCheckpoint('weights_best_model', monitor='val_loss', verbose=1, save_best_only=True, mode='min')
+checkpoint = ModelCheckpoint('../data/weights_best_model', monitor='val_loss', verbose=1, save_best_only=True, mode='min')
 early_stopping = EarlyStopping(patience=5)
 callbacks_list = [checkpoint, early_stopping]
 
