@@ -55,6 +55,9 @@ def make_preds(d):
 
     pred = model.predict(X) #['Healthy control', 'Myocardial infarction', 'Bundle branch block', 'Cardiomyopathy']
 
+    print('score healthyness :',  get_score_health(pred))
+    print('disease detected',  get_disease(pred))
+    print('trends over probabilities',  notice_trends(last_preds, pred))
     return X
 
 while True:
