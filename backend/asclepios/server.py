@@ -14,7 +14,7 @@ with open('config.json', 'r') as config_file:
 mqttc.connect(config['broker_uri'], port=1883, keepalive=60)
 mqttc.loop_start()
 
-model = pkl.load(open('sklearn_model_fitted.pkl', 'rb'))
+model = pkl.load(open('../../data/sklearn_model_fitted.pkl', 'rb'))
 diseases = ['Myocardial infarction', 'Bundle branch block', 'Cardiomyopathy', 'twa']
 
 last_preds = {
