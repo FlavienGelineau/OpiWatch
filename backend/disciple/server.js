@@ -7,7 +7,7 @@ const envt = process.env.NODE_ENV || 'development';
 const config = require('./config.json')[envt];
 
 const mockFilename = process.argv[3] || 'bidmc_05_Signals.csv';
-const broker_uri = process.argv[2]
+const broker_uri = process.argv[2] || config.broker_uri
 
 console.log(mockFilename)
 console.log(broker_uri)
@@ -29,7 +29,7 @@ const data = generator.format(mockFilename)
       index = (index + 1) % data.length;
       client.publish(id, JSON.stringify({
         "time" : data[index]["time"],
-        "avg" : data[index]["AVR"]
+        "AVR" : data[index]["AVR"]
       }))
     }, 8);
   })
