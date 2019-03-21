@@ -75,27 +75,31 @@
     var refreshDelay = 100;
     var graphHeight = document.getElementsByClassName('watcher')[0].clientHeight;
     client.on('message', (topic, message) => {
-      let newData = JSON.parse(message.toString());
-      if(data.hasOwnProperty(topic)){
-        for(let key in newData) {
-          if(newData.hasOwnProperty(key) && key !== xLabel){
-            data[topic][key].push({
-              x : newData[xLabel],
-              y : newData[key]
-            });
-            if(data[topic][key].length > refreshDelay * 8){
-              data[topic][key].shift();
+      if(topic.indexOf(('preds')) !== -1) {
+        let newData = JSON.parse(message.toString());
+      } else {
+        let newData = JSON.parse(message.toString());
+        if(data.hasOwnProperty(topic)){
+          for(let key in newData) {
+            if(newData.hasOwnProperty(key) && key !== xLabel){
+              data[topic][key].push({
+                x : newData[xLabel],
+                y : newData[key]
+              });
+              if(data[topic][key].length > refreshDelay * 8){
+                data[topic][key].shift();
+              }
             }
           }
-        }
-      } else {
-        data[topic] = {}
-        for(let key in newData) {
-          if(newData.hasOwnProperty(key) && key !== xLabel){
-            data[topic][key] = [{
-              x : newData[xLabel],
-              y : newData[key]
-            }]
+        } else {
+          data[topic] = {}
+          for(let key in newData) {
+            if(newData.hasOwnProperty(key) && key !== xLabel){
+              data[topic][key] = [{
+                x : newData[xLabel],
+                y : newData[key]
+              }]
+            }
           }
         }
       }
@@ -167,6 +171,9 @@
       client.subscribe(topic, function() {
         console.log("listening to topic", topic) 
       });
+      client.subscribe(topic+'-preds', function() {
+        console.log("listening to preds for topic", topic)
+      })
       updateProcesses[topic] = setInterval(() => {
         let p = graphs[topic].series.active;
         graphs[topic].series = getRickshawFormat(data[topic]);

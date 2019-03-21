@@ -67,7 +67,7 @@ class NDStandardScaler(TransformerMixin):
             X = X.reshape(-1, *self._orig_shape)
         return X
 
-model = pkl.load(open('../../../data/sklearn_model_fitted.pkl', 'rb'))
+model = pkl.load(open('../../data/sklearn_model_fitted.pkl', 'rb'))
 diseases = ['Myocardial infarction', 'Bundle branch block', 'Cardiomyopathy', 'twa']
 
 last_preds = {

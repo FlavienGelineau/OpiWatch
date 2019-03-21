@@ -85,6 +85,11 @@ header {
     align-items: center;
 }
 
+.dashboard .watcher.dangered {
+    background-color: red;
+    border-radius: 5px;
+}
+
 .dashboard #add-controls {
     margin-top: 20px;
     display: flex;
