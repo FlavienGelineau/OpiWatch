@@ -13,7 +13,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "ejs": "^2.6.1",
-    "express": "^4.16.4",
+    "express": "^4.18.2",
     "mqtt": "^2.18.8",
     "opn": "^5.4.0",
     "rickshaw": "^1.6.6"
